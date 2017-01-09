@@ -1,0 +1,53 @@
+.navbar-brand {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.game {
+	width: 30.86%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-style: solid;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+.game:hover {
+	background: white;
+  opacity: 50%;
+}
+.row-fluid {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+
+.page-header {
+	margin-left: 5%;
+	width: 86%;
+}
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 800px)
+{
+	nav .col-md-5 {
+		padding-top: 7px;
+		position: absolute;
+		left: 30%;
+	}
+}
