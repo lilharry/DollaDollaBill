@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+    <body>
+  <h3><center>Start a New Story!</center></h3>
+  <form action="/postitem/" method = "POST" action="app.py">
+    <b>Item:</b>
+    <input type = "text" name = "name" placeholder = "almostMoney" required></center>
+    <br>
+      <b>Condition:</b>
+    <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Condition
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">New</a>
+      <a class="dropdown-item" href="#">Used</a>
+    </div>
+    <br>
+      <b>Price:</b>
+      <input type = "int" name = "price" placeholder = "1 Dolla" required></center>
+    <br>
+      <b>Summary:</b>
+      <textarea rows="4" cols="50" name="summary" placeholder = "Waste your money on this because..."></textarea>
+    <br>
+      <b>Location:</b>
+        <input type = "text" name = "location" placeholder = "Shadow Realm" required></center>
+    <br>
+    <center><input type= "submit" value= "Submit Item"></center>
+  </form>
+</html>
