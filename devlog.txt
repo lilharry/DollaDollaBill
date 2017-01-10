@@ -3,6 +3,11 @@
 -------------------------------------------------------------------------------
 Format: firstL -- TIMESTAMP
 
+ziyanL -- 2017-1-09 @12:30
+  Started post.html,
+  added bootstrap and basic textbox + buttons
+  (still need to make pretty and check functionality)
+
 yikaiW -- 2017-1-09 @12:30
   Added bootstrap and jquery js and fonts
   Added basic template format
