@@ -3,8 +3,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../static/overwrite.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Bungee+Shade|Permanent+Marker" rel="stylesheet">
 
         <script src="../static/js/jquery.min.js"></script>
         <script src="../static/js/bootstrap.min.js"></script>
@@ -66,40 +65,28 @@
         </nav>
 
         <div class="jumbotron text-center">
-            <h1 id="homepageJumbo"> Dolla Dolla Bill </h1>
-            <h3>A free market</h3>
+            <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
+            <h3 id="h3Jumbo">A free market</h3>
         </div>
 
         <div class="page-header">
 	  <center>
-            <h2>Featured Listings:</h2>
+            <h2 class="featured">Featured Listings:</h2>
 	    </center>
 	</div>
 
         <div class="games">
             <div class="container-fluid" id="homepageContainer">
-              {% for game in game_data %}
-	      <a href="/gamepage/{{game[5]}}">
-                <div class="row" id="gameRow">
-                    <a href="/gamepage/{{game[5]}}">
-                        <div class="col-md-6" id="gameRowImg">
-                            <img src="{{game[4]}}" class="img-responsive"  height="100px"> </img>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="gameText"> {{game[0]}} </p>
-                            <p class="gameText">
-                            {% if game[2] %}
-                            Discount: {{game[3]}}% <br>
-                            Final Price: ${{game[1]}}
-                            </p>
-                            {% else %}
-                            Price: ${{game[1]}} <br>
-                            {% endif %}
-                            </p>
-                        </div>
-</div>
-</a>
-                {% endfor %}
+	<div class="row grid-divider">
+              <div class="col-sm-6">
+        <h3>Column 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima expedita incidunt rerum.</p>
+    </div>
+    <div class="col-sm-6">
+        <h3>Column 2</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate placeat suscipit maxime tenetur officiis asperiores quae molestias fugiat praesentium dolorum.</p>
+    </div>
+	</div>
             </div>
 
             <br>
