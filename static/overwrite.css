@@ -15,6 +15,29 @@
 	background: white;
   opacity: 50%;
 }
+#h1Jumbo {
+	font-family: 'Bungee Shade', cursive;
+}
+#h3Jumbo {
+	font-family: 'Black Ops One', cursive;
+}
+.featured {
+	font-family: 'Permanent Marker', cursive;
+}
+.grid-divider {
+        position: relative;
+        padding: 0;
+}
+.grid-divider>[class*='col-'] {
+      position: static;
+}
+.grid-divider>[class*='col-']:nth-child(n+2):before {
+        content: "";
+        border-left: 1px solid #DDD;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+}
 .row-fluid {
 	display: -webkit-flex;
 	display: flex;
