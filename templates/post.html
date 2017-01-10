@@ -1,19 +1,31 @@
 <!DOCTYPE html>
-    <body>
-  <h3><center>Start a New Story!</center></h3>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <body>
+  <h3><center>Sell an item!</center></h3>
   <form action="/postitem/" method = "POST" action="app.py">
     <b>Item:</b>
     <input type = "text" name = "name" placeholder = "almostMoney" required></center>
     <br>
       <b>Condition:</b>
-    <div class="btn-group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Condition
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">New</a>
-      <a class="dropdown-item" href="#">Used</a>
-    </div>
+    <div class="dropdown">
+  #<script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
+  #<script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+  #<script>function(e){('.dropdown-toggle').dropdown()}</script>
+  #<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  condition</button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+    <br>
     <br>
       <b>Price:</b>
       <input type = "int" name = "price" placeholder = "1 Dolla" required></center>
@@ -26,4 +38,5 @@
     <br>
     <center><input type= "submit" value= "Submit Item"></center>
   </form>
+  </body>
 </html>
