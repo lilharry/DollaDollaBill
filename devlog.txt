@@ -18,3 +18,7 @@ harryL -- 2017-1-10 @12:34
   
   Finish login.py
   Add changes to design document (on google docs)
+  
+yikaiW -- 2017-1-10 @12:35
+  Added fonts to home.html (for testing)
+  plan to add columns
