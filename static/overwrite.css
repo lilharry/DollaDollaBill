@@ -28,15 +28,9 @@
         position: relative;
         padding: 0;
 }
-.grid-divider>[class*='col-'] {
-      position: static;
-}
-.grid-divider>[class*='col-']:nth-child(n+2):before {
-        content: "";
+.grid-divider>[class*='col-']:nth-child(n+2) {
         border-left: 1px solid #DDD;
-        position: absolute;
-        top: 0;
-        bottom: 0;
+	padding-left: 4%;
 }
 .row-fluid {
 	display: -webkit-flex;
