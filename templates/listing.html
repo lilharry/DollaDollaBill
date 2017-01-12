@@ -7,28 +7,19 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <body>
-  <h3><center>Sell an item!</center></h3>
-  <form action="/postitem/" method = "POST" action="app.py">
-    <b>Item:</b>
-    <input type = "text" name = "name" placeholder = "almostMoney" required></center>
+  <form action="/claimitem/" method = "POST" action="app.py">
     <br>
-      <b>Condition:</b>
-  <select class="btn btn-primary dropdown-toggle">
-    <option value="new">New</option>
-    <option value="used">Used</option>
-  <select>
+    <b>Item:</b> {{item[name]}}
     <br>
-      <b>Price:</b>
-      <input type = "int" name = "price" placeholder = "1 Dolla" required></center>
+    <b>Condition:</b> {{item[condition]}}
     <br>
-      <b>Summary:</b>
-      <br>
-      <textarea class="jumbotron" rows="4" cols="50" name="summary" placeholder = "Waste your money on this because..."></textarea>
+    <b>Price:</b> {{item[price]}}
     <br>
-      <b>Location:</b>
-        <input type = "text" name = "location" placeholder = "Shadow Realm" required></center>
+    <b>Summary:</b> {{item[summary]}}
     <br>
-    <center><input type= "submit" class="btn btn-success" value= "Submit Item"></center>
+    <b>Location:</b> {{item[summary]}}
+    <br>
+    <center><input type= "submit" value= "claim"></center>
   </form>
   </body>
 </html>
