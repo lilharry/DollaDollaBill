@@ -53,7 +53,42 @@ def create(id):
 @app.route('/listing/<id>/')
 def listing(id):
     return render_template("listing.html");
+    
+'''    
+@app.route("/upload/", methods=['POST'])
+def upload():
+    target = os.path.join(APP_ROOT, 'static/')
+    if not os.path.isdir(target):
+        os.mkdir(target)
+
+    files = request.files.getlist("file")
+    i = 0
+
+    for file in files:
+        #print(file)
+        filename = file.filename
+        destination = "/".join([target, filename])
+        print(destination)
+        file.save(destination)
+        i += 1
+        print i
+
+    print os.listdir(os.path.join(APP_ROOT, 'uploaded/'))
+    return render_template("confirm.html", title = "Almost There!", more = "Check if the emails correspond to the files:",
+        filelist = os.listdir(os.path.join(APP_ROOT, 'uploaded/')), emails = tempList, mailingList = tempList, subject = tempsubject, msg_body = tempmsg_body)
         
+def delete():
+    files = os.listdir(os.path.join(APP_ROOT, 'uploaded/'))
+
+    for file in files:
+        print file
+        print files
+        os.remove(os.path.join(os.path.join(APP_ROOT, 'uploaded/'), file))
+
+    files = os.listdir(os.path.join(APP_ROOT, 'uploaded/'))
+
+    return (not files)
+'''     
     
 if __name__ == '__main__':
     if os.path.getsize("data/database.db") == 0:
@@ -63,7 +98,7 @@ if __name__ == '__main__':
         print "Initializing database"
         c.execute("CREATE TABLE users (user TEXT, password TEXT)")
         c.execute("CREATE TABLE watchlist (user TEXT, game INTEGER)")
-        c.execute("CREATE TABLE listings (id INTEGER, listing TEXT, user TEXT, location TEXT, timestamp TEXT, type TEXT)")
+        c.execute("CREATE TABLE listings (listing TEXT, user TEXT, location TEXT, timestamp TEXT, type TEXT)")
         c.execute("CREATE TABLE images (id INTEGER, image TEXT)")
         c.execute("CREATE TABLE comments (id INTEGER, user TEXT, comment TEXT, timestamp TEXT)")
         db.commit()

@@ -22,3 +22,9 @@ harryL -- 2017-1-10 @12:34
 yikaiW -- 2017-1-10 @12:35
   Added fonts to home.html (for testing)
   plan to add columns
+
+harryL -- 2017-1-10 @12:34
+  Add listings.py, created add + remove listing functions
+  add broken uplaod code to app.py
+  Add changes to design document (on google docs)
+  

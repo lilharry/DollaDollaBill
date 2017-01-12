@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='dropzone.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dropzone.css') }}">
+</head>
+
+<body>
+  <div class="jumbotron text-center" style="padding: 0.5em 0.6em;">
+              <h2>Upload Files</h2>
+  </div>
+    <div class="container-fluid" style="padding-top:30px;">
+        <form action="/upload/" method="post" class="dropzone" id="myDropzone" enctype="multipart/form-data">
+
+            <div class="fallback">
+                <input id="file-picker" name="file" type="file" multiple required/>
+            </div>
+
+            <div class="text-center">
+                <input type="submit" class="btn btn-info" value="Upload!" id="submit-all">
+                
+            </div>
+        </form>
+    </div>
+    <script>
+      Dropzone.options.myDropzone = {
+        init: function () {
+            var submitButton = document.querySelector("#submit-all");
+            myDropzone = this;
+            submitButton.addEventListener("click", function () {
+                if (myDropzone.files.length > 0) {
+                    return true;
+                }
+                else {
+                    alert("No files were uploaded!");
+                    event.preventDefault();
+                }
+              });
+          }
+      };
+      </script>
+</body>
