@@ -24,13 +24,18 @@
 .featured {
 	font-family: 'Permanent Marker', cursive;
 }
+.media-heading {
+	font-weight: bold;
+}
+.by {
+	font-style: italic;
+}
 .grid-divider {
         position: relative;
         padding: 0;
 }
-.grid-divider>[class*='col-']:nth-child(n+2) {
-        border-left: 1px solid #DDD;
-	padding-left: 4%;
+.grid-divider>[class*='col-']:first-child {
+        border-right: 1px solid #DDD;
 }
 .row-fluid {
 	display: -webkit-flex;
@@ -38,7 +43,14 @@
 	-webkit-justify-content: center;
 	justify-content: center;
 }
-
+.summaryimg {
+	clear: right;
+	float: right;
+	height = 10%;
+	width = 10%;
+	max-height: 200px;
+	max-width: 200px;
+}
 .page-header {
 	margin-left: 5%;
 	width: 86%;
