@@ -51,6 +51,21 @@
 	max-height: 200px;
 	max-width: 200px;
 }
+.detailimg {
+	clear: right;
+	float: right;
+	height = 30%;
+	width = 30%;
+	max-height: 600px;
+	max-width: 600px;
+}
+.detailaddit {
+	position: absolute;
+	bottom: 0%;
+
+	clear: right;
+	float: right;
+}
 .page-header {
 	margin-left: 5%;
 	width: 86%;
@@ -70,6 +85,9 @@
 }
 #login-dp .form-group {
     margin-bottom: 10px;
+}
+#listingContainer {
+	width: 80%;
 }
 
 @media only screen and (min-width: 800px)
