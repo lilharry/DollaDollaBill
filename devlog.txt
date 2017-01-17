@@ -2,6 +2,8 @@
                     Devlog
 -------------------------------------------------------------------------------
 Format: firstL -- TIMESTAMP
+ziyanL -- 2017-1-13 @12:30
+  Additions to post.html and listing.html
 
 ziyanL -- 2017-1-12 @12:30
   Added some bootstrap to post.html and started listing.html.
