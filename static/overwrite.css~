@@ -1,0 +1,99 @@
+.navbar-brand {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.game {
+	width: 30.86%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-style: solid;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+.game:hover {
+	background: white;
+  opacity: 50%;
+}
+#h1Jumbo {
+	font-family: 'Bungee Shade', cursive;
+}
+#h3Jumbo {
+	font-family: 'Black Ops One', cursive;
+}
+.featured {
+	font-family: 'Permanent Marker', cursive;
+}
+.media-heading {
+	font-weight: bold;
+}
+.by {
+	font-style: italic;
+}
+.grid-divider {
+        position: relative;
+        padding: 0;
+}
+.grid-divider>[class*='col-']:first-child {
+        border-right: 1px solid #DDD;
+}
+.row-fluid {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+.summaryimg {
+	clear: right;
+	float: right;
+	height = 10%;
+	width = 10%;
+	max-height: 200px;
+	max-width: 200px;
+}
+.detailimg {
+	clear: right;
+	float: right;
+	height = 30%;
+	width = 30%;
+	max-height: 600px;
+	max-width: 600px;
+}
+.detailaddit {
+	clear: right;
+	float: right;
+	position: absolute;
+	bottom: 0%;
+}
+.page-header {
+	margin-left: 5%;
+	width: 86%;
+}
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+#listingContainer {
+	width: 80%;
+}
+
+@media only screen and (min-width: 800px)
+{
+	nav .col-md-5 {
+		padding-top: 7px;
+		position: absolute;
+		left: 30%;
+	}
+}
