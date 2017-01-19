@@ -63,7 +63,28 @@
                 </ul>
             </div>
         </nav>
-
+        {% if success %}
+        <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{success}}
+        </div>
+        {% endif %}
+        {% if code %}
+        <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{code}}
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{error}}
+        </div>
+        {% endif %}
+        
         <div class="jumbotron text-center">
             <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
             <h3 id="h3Jumbo">A free market</h3>
@@ -82,18 +103,17 @@
         <h3>Products</h3>
 
 
-        <div class="well">
+      {% for listing in products %}
+      <a href="/listings/{{listing[0]}}">
+      <div class="well">
       <div class="media">
-      		<h4 class="media-heading">Jordans</h4>
+      		<h4 class="media-heading">{{listing[1]}}</h4>
     		<img class="media-object summaryimg" src="http://images.footlocker.com/pi/23581001/zoom/jordan-horizon-mens">
   		<div class="media-body">
-          <p class="by">By legend27</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
-Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis
-dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan.
-Aliquam in felis sit amet augue.</p>
+          <p class="by">By {{listing[2]}}</p>
+          <p>{{listing[6]}}</p>
           <ul class="list-inline list-unstyled">
-  			<li><span><i class="glyphicon glyphicon-calendar"></i> 6 days, 9 hours </span></li>
+  			<li><span><i class="glyphicon glyphicon-calendar"></i>{{listing[4]}}</span></li>
             <li>|</li>
             <span><i class="glyphicon glyphicon-comment"></i> 20 comments </span>
             <li>|</li>
@@ -102,8 +122,10 @@ Aliquam in felis sit amet augue.</p>
             </li>
 			</ul>
        </div>
+        </div>
     </div>
-  </div>
+    </a>
+    {%endfor%}
 
 </div>
     <div class="col-sm-5">

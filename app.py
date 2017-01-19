@@ -3,6 +3,7 @@ import sqlite3
 import os
 import json
 import urllib,urllib2
+from utils import listings
 
 app = Flask(__name__)
 
@@ -10,8 +11,13 @@ app = Flask(__name__)
 def homepage():
     error = request.args.get('error') 
     success = request.args.get('success') 
-    
-    return render_template("home.html",success=success,error=error)
+    products = listings.getProducts()
+    for x in products:
+        print x
+    products = listings.getServices()
+    #[rowid, listing, user, location, timestamp,type,details]
+    #[0,     1,       2,    3,        4,        5,   6]
+    return render_template("home - test.html",products=products,success=success,error=error)
 
 @app.route('/authenticate/', methods=['POST'])
 def authenticate():
@@ -98,7 +104,7 @@ if __name__ == '__main__':
         print "Initializing database"
         c.execute("CREATE TABLE users (user TEXT, password TEXT)")
         c.execute("CREATE TABLE watchlist (user TEXT, game INTEGER)")
-        c.execute("CREATE TABLE listings (listing TEXT, user TEXT, location TEXT, timestamp TEXT, type TEXT)")
+        c.execute("CREATE TABLE listings (listing TEXT, user TEXT, location TEXT, timestamp TEXT, type TEXT, details TEXT)")
         c.execute("CREATE TABLE images (id INTEGER, image TEXT)")
         c.execute("CREATE TABLE comments (id INTEGER, user TEXT, comment TEXT, timestamp TEXT)")
         db.commit()

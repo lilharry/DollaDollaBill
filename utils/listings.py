@@ -59,7 +59,9 @@ def getWatchlist(user):
     c.execute("SELECT id FROM watchlist WHERE user=?",(user,))
     for x in c:
         watchlist.append(getListingInfo(x[0]))
+    db.close()
     return watchlist
+    
 
 def getListingInfo(listing):
     info = []
@@ -68,6 +70,7 @@ def getListingInfo(listing):
     c.execute("SELECT * FROM listings WHERE listing=?",(listing,))
     for x in c:
         info.append(x)
+    db.close()
     return info
 
 def getListingInfoId(id):
@@ -77,6 +80,7 @@ def getListingInfoId(id):
     c.execute("SELECT * FROM listings WHERE rowid=?",(id,))
     for x in c:
         info.append(x)
+    db.close()
     return info
 
 def removeWatchlist(user,id):
@@ -93,13 +97,37 @@ def clearWatchlist(user):
     db.commit()
     db.close()
 
+    
+def getProducts():
+    listings = []
+    
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    data = c.execute("SELECT ROWID, * FROM listings WHERE type='product'")
+    for x in c:
+        listings.append(x)   
+    db.close()
+    return listings
+
+def getServices():
+    listings = []
+    
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    data = c.execute("SELECT ROWID, * FROM listings WHERE type='service'")
+    for x in c:
+        listings.append(x)   
+    db.close()
+    return listings
+
+    
 if __name__ == '__main__':
     os.chdir('..')
-    addListing('john','shoes','brooklyn','product')
-    print(getListingInfo(1))
-    removeListing(1)
-    print(getListingInfo(1))
+    addListing('john','jordans','brooklyn','product','hello')
+    addListing('yeeee kaii','smartwatch','canada','product','hello')
     
+    print(getProducts())
+   
 #add user rating to listings
     
     
