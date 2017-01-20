@@ -120,13 +120,21 @@ def getServices():
     db.close()
     return listings
 
+def deleteAllListings():
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    data = c.execute("DELETE FROM listings")
+    db.commit()
+    db.close()
     
 if __name__ == '__main__':
     os.chdir('..')
+    deleteAllListings()
     addListing('john','jordans','brooklyn','product','hello')
     addListing('yeeee kaii','smartwatch','canada','product','hello')
-    
+    addListing('bro','elo boosting','NA','service','I got you with these services my dude')
     print(getProducts())
+    print(getServices())
    
 #add user rating to listings
     

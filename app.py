@@ -12,12 +12,11 @@ def homepage():
     error = request.args.get('error') 
     success = request.args.get('success') 
     products = listings.getProducts()
-    for x in products:
-        print x
-    products = listings.getServices()
+    services = listings.getServices()
+    print services
     #[rowid, listing, user, location, timestamp,type,details]
     #[0,     1,       2,    3,        4,        5,   6]
-    return render_template("home - test.html",products=products,success=success,error=error)
+    return render_template("home - test.html",products=products, services=services,success=success,error=error)
 
 @app.route('/authenticate/', methods=['POST'])
 def authenticate():
