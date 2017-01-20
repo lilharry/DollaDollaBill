@@ -3,7 +3,7 @@ import sqlite3
 import os
 import json
 import urllib,urllib2
-from utils import listings
+from utils import listings, login
 
 app = Flask(__name__)
 
@@ -40,6 +40,7 @@ def authenticate():
             return redirect(url_for('homepage',success="You have logged in"))
         return redirect(url_for('homepage',error=text))
 
+    
 @app.route('/results')
 def results():
     #query = request.args.get('search')
