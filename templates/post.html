@@ -1,35 +1,98 @@
 <!DOCTYPE html>
+    <head>
    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <link rel=”stylesheet” type=”text/css” href=”. /static/css/item.css”>
-  <body>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../static/css/item.css">
+        <link rel="stylesheet" type="text/css" href="../static/overwrite.css">
+        <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Bungee+Shade|Permanent+Marker" rel="stylesheet">
+      <script src="../static/js/jquery.min.js"></script>
+        <script src="../static/js/bootstrap.min.js"></script>
+      <title>DollaDollaBill</title>
+    </head>
+   
+    <body>
+        
+        <nav class="navbar navbar-default navbar-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/"><img src="../static/icon.png" width="40" height="40"></a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Homepage</a></li>
+                    <li><a href="/profile/">Profile</a></li>
+                </ul>
+                <div class="col-md-5">
+                    <form action="/search/" class="search-form">
+                        <div class="form-group has-feedback">
+                            <label for="search" class="sr-only">Search</label>
+                            <input type="text" class="form-control" name="search" placeholder="Search:">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Login<span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form" role="form" action="/authenticate/" method="post" id="login-nav">
+                                            <div class="form-group">
+                                                <input type="text" name="user" class="form-control" placeholder="Username">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" name="pass" class="form-control" placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" name="action" class="btn btn-primary btn-block" value="login">
+                                            </div>
+
+                                    </div>
+                                    <div class="bottom text-center">
+                                        New here?  <input type="submit" class="btn btn-primary btn-sm" name="action" value="register">
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--  Login for navbar -->
+                    <li><a href="/logout/">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="jumbotron text-center">
+            <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
+            <h3 id="h3Jumbo">A free market</h3>
+        </div>
   <h3><center>Sell an item!</center></h3>
-  <form action="/postitem/" method = "POST" action="app.py">
-    <b>Item:</b>
-    <input type = "text" name = "name" placeholder = "almostMoney" required></center>
-    <br>
-      <b>Condition:</b>
-  <select class="btn btn-primary dropdown-toggle">
-    <option value="new">New</option>
-    <option value="used">Used</option>
-  <select>
-    <br>
-      <b>Price:</b>
-      <input type = "int" name = "price" placeholder = "1 Dolla" required></center>
-    <br>
+  <div class="box">
+    <form action="/postitem/" method = "POST" action="app.py">
+     <b>Item:</b>
+     <input type = "text" name = "name" placeholder = "almostMoney" required></center>
+     <br>
+       <b>Condition:</b>
+     <select class="btn btn-primary dropdown-toggle">
+      <option value="new">New</option>
+     <option value="used">Used</option>
+     <select>
+     <br>
+       <b>Price:</b>
+       <input type = "int" name = "price" placeholder = "1 Dolla" required></center>
+     <br>
       <b>Summary:</b>
       <br>
       <textarea class="jumbotron" rows="4" cols="50" name="summary" placeholder = "Waste your money on this because..."></textarea>
-    <br>
+     <br>
       <b>Location:</b>
         <input type = "text" name = "location" placeholder = "Shadow Realm" required></center>
-    <br>
-    <center><input type= "submit" class="btn btn-success" value= "Submit Item"></center>
-  </form>
-  </body>
+     <br>
+     <center><input type= "submit" class="btn btn-success" value= "Submit Item"></center>
+   </form>
+   </div>
+   </body>
 </html>
