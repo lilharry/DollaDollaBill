@@ -59,7 +59,21 @@ def create(id):
 @app.route('/listing/<id>/')
 def listing(id):
     return render_template("listing.html");
-    
+
+@app.route('/postitem/')
+def post():
+    db = sqlite3.connect('data/data.db')
+    a = db.cursor()
+       b = request.form['name']
+       c = request.form['condition']
+       d = request.form['price']
+       e = request.form['Summary']
+       f = request.form['Location']
+       a.execute("CREATE TABLE items (item TEXT, condition TEXT, price INTEGER, Summary TEXT, Location TEXT) IF NOT EXISTS items")
+       a.execute("INSERT INTO items VALUES('%s',%s,%d, %s, %s)")%(b, c, d, e, f)
+    db.commit()
+    db.close()
+
 '''    
 @app.route("/upload/", methods=['POST'])
 def upload():
@@ -95,6 +109,7 @@ def delete():
 
     return (not files)
 '''     
+
     
 if __name__ == '__main__':
     if os.path.getsize("data/database.db") == 0:
