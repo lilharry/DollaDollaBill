@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, session, url_for, redirect
 import sqlite3
 import os
 import json
-import urllib,urllib2
+import urllib
 from utils import listings, login
 
 app = Flask(__name__)
@@ -13,7 +13,6 @@ def homepage():
     success = request.args.get('success') 
     products = listings.getProducts()
     services = listings.getServices()
-    print services
     #[rowid, listing, user, location, timestamp,type,details]
     #[0,     1,       2,    3,        4,        5,   6]
     return render_template("home - test.html",products=products, services=services,success=success,error=error)
@@ -53,26 +52,26 @@ def results():
 
 @app.route('/create/<id>')
 def create(id):
-    return render_template("post.html")
-        
+	return render_template("post.html")
+		
 
 @app.route('/listing/<id>/')
 def listing(id):
-    return render_template("listing.html");
+	return render_template("listing.html");
 
 @app.route('/postitem/')
 def post():
-    db = sqlite3.connect('data/data.db')
-    a = db.cursor()
-       b = request.form['name']
-       c = request.form['condition']
-       d = request.form['price']
-       e = request.form['Summary']
-       f = request.form['Location']
-       a.execute("CREATE TABLE items (item TEXT, condition TEXT, price INTEGER, Summary TEXT, Location TEXT) IF NOT EXISTS items")
-       a.execute("INSERT INTO items VALUES('%s',%s,%d, %s, %s)")%(b, c, d, e, f)
-    db.commit()
-    db.close()
+	db = sqlite3.connect('data/data.db')
+	a = db.cursor()
+	b = request.form['name']
+	c = request.form['condition']
+	d = request.form['price']
+	e = request.form['Summary']
+	f = request.form['Location']
+	a.execute("CREATE TABLE items (item TEXT, condition TEXT, price INTEGER, Summary TEXT, Location TEXT) IF NOT EXISTS items")
+	a.execute("INSERT INTO items VALUES('%s',%s,%d, %s, %s)")%(b, c, d, e, f)
+	db.commit()
+	db.close()
 
 '''    
 @app.route("/upload/", methods=['POST'])
@@ -116,7 +115,7 @@ if __name__ == '__main__':
         f = "data/database.db"
         db = sqlite3.connect(f, check_same_thread=False)
         c = db.cursor()
-        print "Initializing database"
+        print("Initializing database")
         c.execute("CREATE TABLE users (user TEXT, password TEXT)")
         c.execute("CREATE TABLE watchlist (user TEXT, game INTEGER)")
         c.execute("CREATE TABLE listings (listing TEXT, user TEXT, location TEXT, timestamp TEXT, type TEXT, details TEXT)")
