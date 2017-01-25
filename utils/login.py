@@ -15,7 +15,7 @@ def login(user, password):
     #so should be at most one record (in theory)
      
     for record in sel:
-        password = sha1(password).hexdigest()
+        password = sha1(password.encode('utf-8')).hexdigest()
         if (password==record[1]):
             return "" #no error message because it will be rerouted to mainpage
         else:
@@ -41,7 +41,7 @@ def regMain(user, password):#register helper
     reg = regReqs(user, password)
     if reg == "": #if error message is blank then theres no problem, update database
         query = ("INSERT INTO users VALUES (?, ?)")
-        password = sha1(password).hexdigest()
+        password = sha1(password.encode('utf-8')).hexdigest()
         c.execute(query, (user, password))
         db.commit()
         db.close()
