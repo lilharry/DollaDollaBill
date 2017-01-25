@@ -86,9 +86,15 @@
   </div>
   <div class="box">
     <form action="/postitem/" method = "POST">
-     <b>Product:</b>
+     <b>Title:</b>
      <input type = "text" name = "name" placeholder = "almostMoney" required></center>
      <br>
+     <select name="type">
+    <option value="product">Product</option>
+    <option value="saab">Service</option>
+  </select>
+  <br>
+  <br>
       <b>Summary:</b>
       <br>
       <textarea class="jumbotron" rows="4" cols="30" name="summary" placeholder = "Waste your money on this because..."></textarea>
