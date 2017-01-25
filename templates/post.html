@@ -9,11 +9,20 @@
         <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Bungee+Shade|Permanent+Marker" rel="stylesheet">
       <script src="../static/js/jquery.min.js"></script>
         <script src="../static/js/bootstrap.min.js"></script>
-      <title>DollaDollaBill</title>
+      <title>Post</title>
+
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApyg1B4IaAvARvYxMKsIp6dJmlUj3v14k&libraries=places"></script>
+        <script>
+          var autocomplete;
+          function initialize() {
+            autocomplete = new google.maps.places.Autocomplete(
+            /** @type {HTMLInputElement} */(document.getElementById('autocomplete')));
+            google.maps.event.addListener(autocomplete, 'place_changed', function() {});
+          }
+        </script>
     </head>
-   
-    <body>
-        
+
+    <body onload="initialize()">
         <nav class="navbar navbar-default navbar-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -69,35 +78,36 @@
             <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
             <h3 id="h3Jumbo">A free market</h3>
         </div>
-  <h1><center>Sell an item!</center></h1>
+  <h1><center>Sell an item/service!</center></h1>
   <br>
   <br>
   <div id = "up">
       <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTaUwPfjcIfUQU04as-8aN8Wu--EWpGjx9Gf5ndkga0rw-9MOuy" alt="" style="width:400px;height:400px;">
   </div>
   <div class="box">
-    <form action="/postitem/" method = "POST" action="app.py">
-     <b>Item:</b>
+    <form action="/postitem/" method = "POST">
+     <b>Product:</b>
      <input type = "text" name = "name" placeholder = "almostMoney" required></center>
-     <br>
-       <b>Condition:</b>
-     <select class="btn btn-primary dropdown-toggle" name="condition">
-      <option value="new">New</option>
-     <option value="used">Used</option>
-     <select>
-     <br>
-       <b>Price:</b>
-       <input type = "int" name = "price" placeholder = "1 Dolla" required></center>
      <br>
       <b>Summary:</b>
       <br>
       <textarea class="jumbotron" rows="4" cols="30" name="summary" placeholder = "Waste your money on this because..."></textarea>
+     <b>Location:</b>
      <br>
-      <b>Location:</b>
-        <input type = "text" name = "location" placeholder = "Shadow Realm" required></center>
-     <br>
-     <center><input type= "submit" class="btn btn-success" value= "Submit Item"></center>
-   </form>
-   </div>
+     <input id="autocomplete" placeholder="Location" type="text" name="location">
+     <br><br>
+    <center><input type= "submit" class="btn btn-success" value= "Submit Item"></center>
+  </form>
+  </div>
+  <!-- Google Analytics -->
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-76223201-1', 'auto');
+	ga('send', 'pageview');
+</script>
    </body>
 </html>
