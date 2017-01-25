@@ -10,20 +10,22 @@ html {
       -ms-text-size-adjust: 100%;
 }
 body{
-  background: url(http://i304.photobucket.com/albums/nn196/august61/Notebook-background4.jpg) no-repeat;
-  background-size: cover;
 }
 b{
   text-align: center;
 }
+#up{
+  margin-left: 20vw;
+  vertical-align: top;
+  display:inline-block;
+}
 .box {
-  margin-left: 35vw;
+  display:inline-block;
   position: center;
   width: 600px;
   height: 600px;
   font-size: 2em;
-  font-family: "Comic Sans MS", cursive, sans-serif;
-  background-color: white;
+  font-family: monospace, monospace;
 }
 article,
 aside,

@@ -69,7 +69,18 @@
             <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
             <h3 id="h3Jumbo">A free market</h3>
         </div>
-  <h3><center>Sell an item!</center></h3>
+  <h1><center>Sell an item!</center></h1>
+  <br>
+  <br>
+  <script>
+     function upload(){
+        location.href = 'upload.html';
+     }
+  </script>
+  <div id = "up">
+      <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTaUwPfjcIfUQU04as-8aN8Wu--EWpGjx9Gf5ndkga0rw-9MOuy" alt="" style="width:400px;height:400px;" onclick="upload()">
+      <h2><i> Upload a picture!</i></h2>
+  </div>
   <div class="box">
     <form action="/postitem/" method = "POST" action="app.py">
      <b>Item:</b>
@@ -86,7 +97,7 @@
      <br>
       <b>Summary:</b>
       <br>
-      <textarea class="jumbotron" rows="4" cols="25" name="summary" placeholder = "Waste your money on this because..."></textarea>
+      <textarea class="jumbotron" rows="4" cols="30" name="summary" placeholder = "Waste your money on this because..."></textarea>
      <br>
       <b>Location:</b>
         <input type = "text" name = "location" placeholder = "Shadow Realm" required></center>
