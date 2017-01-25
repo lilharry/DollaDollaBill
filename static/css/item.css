@@ -16,13 +16,14 @@ body{
 b{
   text-align: center;
 }
-#a {
+.box {
+  margin-left: 35vw;
   position: center;
-  width: 300px;
-  height: 400px;
-  text-aligned: center;
+  width: 600px;
+  height: 600px;
+  font-size: 2em;
   font-family: "Comic Sans MS", cursive, sans-serif;
-  border: 1px solid blue;
+  background-color: white;
 }
 article,
 aside,
