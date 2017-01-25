@@ -3,7 +3,10 @@
 -------------------------------------------------------------------------------
 Format: firstL -- TIMESTAMP
 ziyanL -- 2017-1-13 @12:30
-  Additions to post.html and listing.html
+  Finished post.html, YeKai's version of listing.html was better suited for our website so we implemented that instead. Post method & ID added to app.py. Small touches upload.html.
+
+ziyanL -- 2017-1-13 @12:30
+  Additions to post.html and listing.html. Item.css added.
 
 ziyanL -- 2017-1-12 @12:30
   Added some bootstrap to post.html and started listing.html.
