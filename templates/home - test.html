@@ -66,8 +66,8 @@
                 </ul>
             </div>
         </nav>
-                
-                  
+
+
         {% if success %}
         <div class="alert alert-success" role="alert">
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -89,7 +89,7 @@
             {{error}}
         </div>
         {% endif %}
-        
+
         <div class="jumbotron text-center">
             <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
             <h3 id="h3Jumbo">A free market</h3>
@@ -105,7 +105,7 @@
             <div class="container-fluid" id="homepageContainer">
 	<div class="row grid-divider">
         <div class="col-sm-5 col-xs-offset-1">
-        
+
         <h3>Products</h3>
       {% for listing in products %}
       <a href="/listings/{{listing[0]}}">
@@ -168,6 +168,7 @@
             <br>
 
         </div>
+      </div>
 
     </body>
 </html>
