@@ -7,14 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../static/css/item.css">
         <link rel="stylesheet" type="text/css" href="../static/overwrite.css">
+        <link rel="stylesheet" type="text/css" href="../static/dropzone.css">
         <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Bungee+Shade|Permanent+Marker" rel="stylesheet">
       <script src="../static/js/jquery.min.js"></script>
         <script src="../static/js/bootstrap.min.js"></script>
-      <title>DollaDollaBill</title>
+        <script src="../static/js/dropzone.js"></script>
+      <title>Upload Images</title>
     </head>
-   
+
     <body>
-        
+
         <nav class="navbar navbar-default navbar-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -70,14 +72,6 @@
             <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
             <h3 id="h3Jumbo">A free market</h3>
         </div>
-    <title>Upload</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='dropzone.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dropzone.css') }}">
-</head>
-
-<body>
   <div class="jumbotron text-center" style="padding: 0.5em 0.6em;">
               <h2>Upload Files</h2>
   </div>
@@ -90,7 +84,7 @@
 
             <div class="text-center">
                 <input type="submit" class="btn btn-info" value="Upload!" id="submit-all">
-                
+
             </div>
         </form>
     </div>
