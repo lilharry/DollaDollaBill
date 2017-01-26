@@ -22,16 +22,8 @@ def removeListing(id):
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
 
-    images = getImagesFromListing(id)
-    os.chdir('static/images')
-    for image in images:
-        os.remove(image)
-    os.chdir("../..")
     c.execute("DELETE FROM listings WHERE rowid=?",(id,))
-    c.execute("DELETE FROM images WHERE id=?",(id,))
-    c.execute("DELETE FROM comments WHERE id=?",(id,))
-    c.execute("DELETE FROM watchlist WHERE id=?",(id,))
-    c.execute("DELETE FROM likes WHERE id=?",(id,))
+
 
     db.commit()
     db.close()

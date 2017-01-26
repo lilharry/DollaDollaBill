@@ -98,11 +98,7 @@
           <a href="/like/{{id}}/"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value=
           {% if not liked %} "Like This Post" {%else%} "Unlike This Post" {%endif%}> </a>
 
-	  {% if owner %}
 
-          <a href="/delete/<id>"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value="Remove Post"></a>
-          <br>
-	  {% endif %}
       <div class="media">
       		<h4 class="media-heading">{{listing[1]}}</h4>
     		<img class="media-object detailimg" src="/static/images/{{listing[7]}}">

@@ -83,11 +83,7 @@ def listing(id):
         user = session['Username']
         liked = listings.alreadyLiked(user,id)
         watchlisted = listings.alreadyWatchlisted(user,id)
-        if user == data[2]:
-            owner = True
-            return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted,owner=owner)
-        else:
-            return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted)
+        return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted)
     else:
         return render_template("listing.html",listing=data,id=id,comments=comments,success=success)
 
