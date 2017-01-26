@@ -91,9 +91,13 @@
 
         <div class="well">
           <a href="#"><input type= "submit" class="btn btn-info" style="clear: right; float: right;" value= "Add to Watchlist"></a>
+
           
           <a href="/like/{{id}}/"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value= 
           {% if not liked %} "Like This Post" {%else%} "Unlike This Post" {%endif%}> </a>
+
+          <br>
+
       <div class="media">
       		<h4 class="media-heading">{{listing[1]}}</h4>
     		<img class="media-object detailimg" src="/static/images/{{listing[7]}}">
@@ -103,7 +107,7 @@
        </div>
     </div>
     <ul class="list-inline list-unstyled detailaddit">
-    			<li><span><i class="glyphicon glyphicon-calendar"></i>{{listing[4]}}</span></li>
+    			<li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
               <li>|</li>
               <span><i class="glyphicon glyphicon-comment"></i>  {{listing[8]}}</span>
               <li>|</li>
