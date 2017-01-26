@@ -8,7 +8,7 @@
         <script src="/static/js/jquery.min.js"></script>
         <script src="/static/js/bootstrap.min.js"></script>
 
-        <title>DollaDollaBill</title>
+        <title>Listing</title>
     </head>
 
     <body>
@@ -19,20 +19,20 @@
                     <a class="navbar-brand" href="/"><img src="/static/icon.png" width="40" height="40"></a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Homepage</a></li>
+                    <li><a href="/">Homepage</a></li>
                     <li><a href="/profile/">Profile</a></li>
                 </ul>
                 <div class="col-md-5">
                     <form action="/search/" class="search-form">
                         <div class="form-group has-feedback">
                             <label for="search" class="sr-only">Search</label>
-                            <input type="text" class="form-control" name="search" placeholder="Search:" value = "search">
+                            <input type="text" class="form-control" name="search" placeholder="Search:">
                             <input type="submit" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" />
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
                     </form>
                 </div>
-		<ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right">
 		{% if 'Username' not in session %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Login<span class="caret"></span></a>
@@ -48,12 +48,12 @@
                                                 <input type="password" name="pass" class="form-control" placeholder="Password">
                                             </div>
                                             <div class="form-group">
-                                                <input type="submit" name="action" class="btn btn-primary btn-block" value="Login">
+                                                <input type="submit" name="action" class="btn btn-primary btn-block" value="login">
                                             </div>
 
                                     </div>
                                     <div class="bottom text-center">
-                                        New here?  <input type="submit" class="btn btn-primary btn-sm" name="action" value="Register">
+                                        New here?  <input type="submit" class="btn btn-primary btn-sm" name="action" value="register">
                                         </form>
                                     </div>
                                 </div>
@@ -67,8 +67,6 @@
                 </ul>
             </div>
         </nav>
-
-
         {% if success %}
         <div class="alert alert-success" role="alert">
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -76,105 +74,96 @@
             {{success}}
         </div>
         {% endif %}
-        {% if code %}
-        <div class="alert alert-success" role="alert">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span>
-            {{code}}
-        </div>
-        {% endif %}
-        {% if error %}
-        <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span>
-            {{error}}
-        </div>
-        {% endif %}
-
         <div class="jumbotron text-center">
             <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
             <h3 id="h3Jumbo">A free market</h3>
         </div>
 
+
         <div class="page-header">
 	  <center>
-            <h2 class="featured">Featured Listings:</h2>
+            <h2 class="featured">Listing Details:</h2>
 	    </center>
 	</div>
 
         <div class="games">
-            <div class="container-fluid" id="homepageContainer">
-	<div class="row grid-divider">
-        <div class="col-sm-5 col-xs-offset-1">
+            <div class="container-fluid" id="listingContainer">
 
-        <h3>Products</h3>
-      {% for listing in products %}
 
-      <a href="/listings/{{listing[0]}}/">
+        <div class="well">
+          <a href="#"><input type= "submit" class="btn btn-info" style="clear: right; float: right;" value= "Add to Watchlist"></a>
 
-      <div class="well">
+
+          <a href="/like/{{id}}/"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value=
+          {% if not liked %} "Like This Post" {%else%} "Unlike This Post" {%endif%}> </a>
+
+
+          <a href="#"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value="Remove Post"></a>
+          <br>
+
       <div class="media">
       		<h4 class="media-heading">{{listing[1]}}</h4>
-    		<img class="media-object summaryimg" src="static/images/{{listing[7]}}">
+    		<img class="media-object detailimg" src="/static/images/{{listing[7]}}">
   		<div class="media-body">
           <p class="by">By {{listing[2]}}, in {{listing[3]}}</p>
           <p>{{listing[6]}}</p>
-          <ul class="list-inline list-unstyled">
-  			<li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
-            <li>|</li>
-            <span><i class="glyphicon glyphicon-comment"></i>  {{listing[8]}}</span>
-            <li>|</li>
-            <li>
-               <span><i class="glyphicon glyphicon-thumbs-up"></i> {{listing[9]}}</span>
-            </li>
-			</ul>
        </div>
-        </div>
     </div>
-    </a>
-    {%endfor%}
+    <ul class="list-inline list-unstyled detailaddit">
+    			<li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
+              <li>|</li>
+              <span><i class="glyphicon glyphicon-comment"></i>  {{listing[8]}}</span>
+              <li>|</li>
+              <li>
+                 <span><i class="glyphicon glyphicon-thumbs-up"></i> {{listing[9]}}</span>
+              </li>
+  			</ul>
 
+  <div class="container bootstrap snippet">
+    <div class="row">
+		<div class="col-md-12">
+		    <div class="blog-comment">
+				<h3>Comments</h3>
+				<ul class="comments">
+                {% for comment in comments %}
+				<li class="clearfix">
+				  <div class="post-comments">
+				      <p class="meta"><a href="/profile/{{comment[1]}}">{{comment[1]}}</a> on {{comment[3]}} says :</p>
+				      <p>
+				          {{comment[2]}}
+				      </p>
+				  </div>
+				</li>
+                {% endfor %}
+				</ul>
+        {% if 'Username' in session %}
+        <form action="/comment/" method="post">
+          <div class="input-group">
+                    <input type="hidden" name="id" value="{{id}}">
+                    <input class="form-control" name="comment" placeholder="Add a comment" type="text">
+                    <span class="input-group-addon">
+                        <input type="submit" class="btn btn-outline-secondary">
+                    </span>
+                </div>
+      </form>
+      {%else%}
+         <li class="clearfix">
+				  <div class="post-comments">
+				      <p>
+				          Log in to add comments!
+				      </p>
+				  </div>
+	     </li>
+      {% endif %}
+			</div>
+		</div>
+	</div>
 </div>
-    <div class="col-sm-5">
-        <h3>Services</h3>
 
-
-        {% for listing in services %}
-
-      <a href="/listings/{{listing[0]}}/">
-
-
-      <div class="well">
-      <div class="media">
-      		<h4 class="media-heading">{{listing[1]}}</h4>
-    		<img class="media-object summaryimg" src="static/images/{{listing[7]}}">
-  		<div class="media-body">
-          <p class="by">By {{listing[2]}}, in {{listing[3]}}</p>
-          <p>{{listing[6]}}</p>
-          <ul class="list-inline list-unstyled">
-  			<li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
-            <li>|</li>
-            <span><i class="glyphicon glyphicon-comment"></i> {{listing[8]}}</span>
-            <li>|</li>
-            <li>
-               <span><i class="glyphicon glyphicon-thumbs-up"></i> {{listing[9]}}</span>
-            </li>
-			</ul>
-       </div>
-        </div>
-    </div>
-    </a>
-    {%endfor%}
-
-
-    </div>
+              </div>
             </div>
-
-            <br>
-            <br>
-
         </div>
-      </div>
 
     </body>
+
 </html>
