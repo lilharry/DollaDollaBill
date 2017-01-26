@@ -161,10 +161,10 @@ def watchlist(id):
     
     if not listings.alreadyWatchlisted(user,id):
         listings.addToWatchlist(user,id)
-        return redirect(url_for("listing",id=id,success="Added to watchlist"))
+        return redirect(url_for("listing",id=id,success="Added to Watchlist"))
     else:
         listings.removeFromWatchlist(user,id)
-        return redirect(url_for("listing",id=id,success="Added to Watchlist"))
+        return redirect(url_for("listing",id=id,success="Removed from Watchlist"))
         
     
 if __name__ == '__main__':

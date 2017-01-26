@@ -95,7 +95,6 @@ def getListingInfoId(id):
         
         info.append(x)   
     db.close()
-<<<<<<< HEAD
     return info
 
 def contain(text):
@@ -107,9 +106,7 @@ def contain(text):
         data.append(getListingInfoId(x))
     db.close()
     return data
-=======
-    return info[0]
->>>>>>> 858b86e2b8dbbf70a14dea39b9479506c646b047
+
     
 def getProducts():
     listings = []
@@ -166,8 +163,9 @@ def getWatchlistP(user):
     c = db.cursor() 
     c.execute("SELECT id FROM watchlist WHERE user=?",(user,))
     for x in c:
-        info = getListingInfoId(x[0])
-        if info[5] == 'product'
+        info = getListingInfoId(x[0])[0]
+        print (info)
+        if info[5] == 'product':
             watchlist.append(info)
     db.close()
     return watchlist
@@ -178,8 +176,9 @@ def getWatchlistS(user):
     c = db.cursor() 
     c.execute("SELECT id FROM watchlist WHERE user=?",(user,))
     for x in c:
-        info = getListingInfoId(x[0])
-        if info[5] == 'service'
+        info = getListingInfoId(x[0])[0]
+        print (info)
+        if info[5] == 'service':
             watchlist.append(info)
     db.close()
     return watchlist
@@ -273,7 +272,7 @@ def numLikes(id):
     
 if __name__ == '__main__':
     os.chdir('..')
-    
+
 
    
 #add user rating to listings

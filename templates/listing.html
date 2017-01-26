@@ -91,7 +91,8 @@
 
 
         <div class="well">
-          <a href="#"><input type= "submit" class="btn btn-info" style="clear: right; float: right;" value= "Add to Watchlist"></a>
+          <a href="/watchlist/{{id}}"><input type= "submit" class="btn btn-info" style="clear: right; float: right;" value= 
+          {% if not watchlisted %} "Add to Watchlist" {%else%} "Remove from Watchlist" {%endif%}> </a>
 
 
           <a href="/like/{{id}}/"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value=
