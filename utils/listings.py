@@ -108,7 +108,7 @@ def getListingsP(user):
     info = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT rowid, * FROM listings WHERE user=? and type='product'",(user,))
+    c.execute("SELECT ROWID, * FROM listings WHERE user=? and type='product'",(user,))
     for x in c:
         image = getImagesFromListing(x[0])
         x = x + (image[0],)
@@ -199,7 +199,8 @@ def getNextID():
         
 if __name__ == '__main__':
     os.chdir('..')
-    deleteAllListings()
+    print(getListingsP('eb'))
+    
 
    
 #add user rating to listings
