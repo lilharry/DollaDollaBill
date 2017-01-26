@@ -59,6 +59,17 @@ def addComment(id,user,comment):
     db.close()
     return 0
 
+def getCommentsFor(id):
+    ans = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+
+    data = c.execute("SELECT * FROM comments WHERE id=?",(id,))
+    for x in data:
+        ans.append(x)
+    db.close()
+    return ans
+
 def addToWatchlist(user,id,type):
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
@@ -66,19 +77,6 @@ def addToWatchlist(user,id,type):
     db.commit()
     db.close()
     return 0
-
-def getListingInfo(listing,type):
-    info = []
-    db = sqlite3.connect("data/database.db")
-    c = db.cursor() 
-    c.execute("SELECT rowid, * FROM listings WHERE listing=? AND type=?",(listing,type))
-    for x in c:
-        image = getImagesFromListing(x[0])
-        x = x + (image[0],)
-        info.append(x)    
-    db.close()
-
-    return info
 
 def getListingInfoId(id):
     info = []
@@ -90,7 +88,7 @@ def getListingInfoId(id):
         x = x + (image[0],)
         info.append(x)    
     db.close()
-    return info
+    return info[0]
     
 def getProducts():
     listings = []
@@ -195,7 +193,8 @@ def getNextID():
         
 if __name__ == '__main__':
     os.chdir('..')
-    print(getListingsP('eb'))
+    print(getListingInfoId(1))
+    print(getListingInfoId(1)[0][0])
     
 
    

@@ -76,7 +76,8 @@ def listing(id):
     data = listings.getListingInfoId(id)
     #[rowid, listing, user, location, timestamp,type,details]
     #[0,     1,       2,    3,        4,        5,   6]
-    return render_template("listing.html",listing=data)
+    comments = listings.getCommentsFor(id)
+    return render_template("listing.html",listing=data,id=id,comments=comments)
 
 
 @app.route('/logout/')
@@ -122,8 +123,13 @@ def uproad():
     user = session['Username']
     return redirect(url_for("profile",username=user,success="addedListing"))
 
-
-
+@app.route("/comment/",methods=['POST'])
+def comment():
+    user = session['Username']
+    id = int(request.form["id"])
+    comment = request.form["comment"]
+    listings.addComment(id,user,comment)
+    return redirect(url_for("listing",id=id,success="Comment added"))
 
 if __name__ == '__main__':
     if os.path.getsize("data/database.db") == 0:
