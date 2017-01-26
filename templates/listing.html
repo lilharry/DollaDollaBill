@@ -76,18 +76,18 @@
         </div>
   </head>
   <body>
-    <img src={{"../static/image/"+item[pic]}} alt="pic" style="width:250px;height:250px;">
+    <img src={{item[0]}} alt="pic" style="width:250px;height:250px;">
   <form action="/claimitem/" method = "POST" action="app.py">
     <br>
-    <b>Item:</b> {{item[name]}}
+    <b>Item:</b> {{item[1]}}
     <br>
-    <b>Condition:</b> {{item[condition]}}
+    <b>Seller:</b> {{item[2]}}
     <br>
-    <b>Price:</b> {{item[price]}}
+    <b>Condition:</b> {{item[5]}}
     <br>
-    <b>Summary:</b> {{item[summary]}}
+    <b>Summary:</b> {{item[6]}}
     <br>
-    <b>Location:</b> {{item[summary]}}
+    <b>Location:</b> {{item[3]}}
     <br>
     <center><input type= "submit" value= "claim"></center>
   </form>
