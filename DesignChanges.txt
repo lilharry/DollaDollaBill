@@ -1,0 +1,10 @@
+﻿Design Changes:
+
+* Changed the listing schema:
+      * Moved location to the same line as the username.
+      * Placed date on the same line as the number of likes and comments
+* Database table changes:
+      * Image in images table is stored as text
+      * Type is added to listings table to differentiate between products and services
+* Although we allow more than one image to be uploaded, only the first image will be displayed.
+* We also added options to remove listing (only for authors) and “unlike” the post.
