@@ -27,6 +27,7 @@
                         <div class="form-group has-feedback">
                             <label for="search" class="sr-only">Search</label>
                             <input type="text" class="form-control" name="search" placeholder="Search:">
+                            <input type="submit" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" />
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
                     </form>
@@ -75,20 +76,24 @@
 
       <div class="games">
           <div class="container-fluid" id="homepageContainer">
+{% for b in results %}
   <div class="row grid-divider">
       <div class="col-sm-5 col-xs-offset-1">
-
-      <h3>Products</h3>
-    <a href="/listings/{{listing[0]}}">
+     <h3>Products:</h3>
+    <a href="/listings/{{b[0]}}">
     <div class="well">
     <div class="media">
-        <h4 class="media-heading">{{listing[1]}}</h4>
-      <img class="media-object summaryimg" src="http://images.footlocker.com/pi/23581001/zoom/jordan-horizon-mens">
+        <h4 class="media-heading">{{b[1]}}</h4>
+      <img class="media-object summaryimg" src={{b[7]}}>
     <div class="media-body">
-        <p class="by">By {{listing[2]}}</p>
-        <p>{{listing[6]}}</p>
+        <p class="by">By {{b[2]}}</p>
+        <p>{{b[6]}}</p>
         <ul class="list-inline list-unstyled">
+<<<<<<< HEAD
+      <li><span><i class="glyphicon glyphicon-calendar"></i>{{b[4]}}</span></li>
+=======
       <li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
+>>>>>>> 858b86e2b8dbbf70a14dea39b9479506c646b047
           <li>|</li>
           <span><i class="glyphicon glyphicon-comment"></i> 20 comments </span>
           <li>|</li>
@@ -98,9 +103,13 @@
     </ul>
      </div>
       </div>
+
+    </div>
   </div>
   </a>
   </div>
+<<<<<<< HEAD
+=======
   <div class="col-sm-5">
       <h3>Services</h3>
     <a href="/listings/{{listing[0]}}">
@@ -122,6 +131,7 @@
     </ul>
      </div>
       </div>
+>>>>>>> 858b86e2b8dbbf70a14dea39b9479506c646b047
   </div>
   </a>
   </div>

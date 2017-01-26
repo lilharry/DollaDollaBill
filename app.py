@@ -91,6 +91,12 @@ def logout():
     session.pop("Username")
     return redirect(url_for('homepage',success="You have successfully logged out"))
 
+@app.route('/search/')
+def search():
+    re = listings.contain(request.form["search"])
+    return render_template('search - test.html', results= re)
+
+
 @app.route("/postitem/", methods=['POST'])
 def upload():
     user = session['Username']
