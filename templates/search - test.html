@@ -80,6 +80,7 @@
   <div class="row grid-divider">
       <div class="col-sm-5 col-xs-offset-1">
      <h3>Products:</h3>
+    {% if b[] == "product" %}
     <a href="/listings/{{b[0]}}">
     <div class="well">
     <div class="media">
@@ -89,11 +90,11 @@
         <p class="by">By {{b[2]}}</p>
         <p>{{b[6]}}</p>
         <ul class="list-inline list-unstyled">
-<<<<<<< HEAD
       <li><span><i class="glyphicon glyphicon-calendar"></i>{{b[4]}}</span></li>
+<<<<<<< HEAD
 =======
       <li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
->>>>>>> 858b86e2b8dbbf70a14dea39b9479506c646b047
+>>>>>>> e75aedfd55065aaaa5d21a7c07a332dcaa0f332e
           <li>|</li>
           <span><i class="glyphicon glyphicon-comment"></i> 20 comments </span>
           <li>|</li>
@@ -101,6 +102,7 @@
              <span><i class="glyphicon glyphicon-thumbs-up"></i> 420</span>
           </li>
     </ul>
+ {% endfor %}
      </div>
       </div>
 
@@ -110,6 +112,8 @@
   </div>
 <<<<<<< HEAD
 =======
+   
+   {% else %}
   <div class="col-sm-5">
       <h3>Services</h3>
     <a href="/listings/{{listing[0]}}">
@@ -131,13 +135,14 @@
     </ul>
      </div>
       </div>
->>>>>>> 858b86e2b8dbbf70a14dea39b9479506c646b047
   </div>
   </a>
   </div>
   </div>
+         {% endfor %}
   </div>
   </div>
+>>>>>>> e75aedfd55065aaaa5d21a7c07a332dcaa0f332e
 
 <br><br>
 
