@@ -76,7 +76,6 @@ def listing(id):
     data = listings.getListingInfoId(id)
     #[rowid, listing, user, location, timestamp,type,details]
     #[0,     1,       2,    3,        4,        5,   6]
-    data[0] = "..static/image/"+ data[0] + ".png"
     return render_template("listing.html",item=data)
 
 

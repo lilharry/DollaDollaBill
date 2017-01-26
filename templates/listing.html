@@ -76,10 +76,12 @@
         </div>
   </head>
   <body>
-    <img src={{item[0]}} alt="pic" style="width:250px;height:250px;">
+    <img src={{item[7]}} alt="pic" style="width:250px;height:250px;">
   <form action="/claimitem/" method = "POST" action="app.py">
     <br>
     <b>Item:</b> {{item[1]}}
+    <br>
+    <b>Time Stamp:</b> {{item[4]}}
     <br>
     <b>Seller:</b> {{item[2]}}
     <br>
