@@ -65,7 +65,15 @@
                 </ul>
             </div>
         </nav>
-
+        
+        {% if success %}    
+        <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{success}}
+        </div>
+        {% endif %}
+        
         <div class="jumbotron text-center">
             <h1 id="h1Jumbo"> {{username}}'s profile </h1>
         </div>

@@ -74,27 +74,28 @@ def profile(username):
 @app.route('/listing/<id>/')
 def listing(id):
     data = getListingInfoId(id)
+    #[rowid, listing, user, location, timestamp,type,details]
+    #[0,     1,       2,    3,        4,        5,   6]
     return render_template("listing.html",listing=data)
 
-@app.route('/postitem/',methods=['POST'])
-def post():
+
+@app.route('/logout/')
+def logout():
+    session.pop("Username")
+    return redirect(url_for('homepage',success="You have successfully logged out"))
+
+@app.route("/postitem/", methods=['POST'])
+def upload():
     user = session['Username']
     listing = request.form["listing"]
     location = request.form["location"]
     type = request.form["type"]
     details = request.form["details"]
     
-    id = listings.addListing(user,listing,location,type,details)
-    return render_template('upload.html',listing=listing,id=id)
-
-@app.route('/logout/')
-def logout():
-    session.pop("Username")
-    return redirect(url_for('homepage',success="You have successfully logged out"))
-'''
-@app.route("/postitem/")
-def upload():
-    target = os.path.join(APP_ROOT, 'static/')
+    id = listings.getNextID()
+    
+    
+    target = os.path.join(app.root_path, 'static/images')
     if not os.path.isdir(target):
         os.mkdir(target)
 
@@ -103,31 +104,31 @@ def upload():
 
     for file in files:
         #print(file)
-        filename = file.filename
+        filename = str(id) + str(i) + "." + file.filename[-3:]
+        print(filename)
+        print("-------")
         destination = "/".join([target, filename])
         print(destination)
         file.save(destination)
         i += 1
-        print i
-
-    print os.listdir(os.path.join(APP_ROOT, 'uploaded/'))
-    return render_template("confirm.html", title = "Almost There!", more = "Check if the emails correspond to the files:",
-        filelist = os.listdir(os.path.join(APP_ROOT, 'uploaded/')), emails = tempList, mailingList = tempList, subject = tempsubject, msg_body = tempmsg_body)
         
 
-def delete():
-    files = os.listdir(os.path.join(APP_ROOT, 'uploaded/'))
-    for file in files:
-        print file
-        print files
-        os.remove(os.path.join(os.path.join(APP_ROOT, 'uploaded/'), file))
-
-    files = os.listdir(os.path.join(APP_ROOT, 'uploaded/'))
-
-    return (not files)
-'''     
-
+    print( os.listdir(os.path.join(app.root_path, 'static/images')))
+    return render_template("upload.html",user=user,listing=listing,location=location,type=type,details=details)
     
+@app.route("/upload/",methods=['POST'])
+def uproad():
+    user = session['Username']
+    listing = request.form["listing"]
+    location = request.form["location"]
+    type = request.form["type"]
+    details = request.form["details"]
+    listings.addListing(user,listing,location,type,details)
+    return redirect(url_for("profile",username=user,success="addedListing"))
+
+
+
+
 if __name__ == '__main__':
     if os.path.getsize("data/database.db") == 0:
         f = "data/database.db"

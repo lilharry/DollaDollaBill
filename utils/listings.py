@@ -156,6 +156,14 @@ def deleteAllListings():
     db.commit()
     db.close()
     
+def getNextID():
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    data = c.execute("SELECT max(rowid) FROM listings")
+    for x in data:
+        db.close()  
+        return x[0] + 1
+
 if __name__ == '__main__':
     os.chdir('..')
     deleteAllListings()
@@ -164,6 +172,7 @@ if __name__ == '__main__':
     addListing('bro','elo boosting','NA','service','I got you with these services my dude')
     print(getProducts())
     print(getServices())
+    print(getNextID())
    
 #add user rating to listings
     
