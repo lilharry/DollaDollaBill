@@ -13,8 +13,10 @@ def homepage():
     success = request.args.get('success') 
     products = listings.getProducts()
     services = listings.getServices()
-    #[rowid, listing, user, location, timestamp,type,details]
-    #[0,     1,       2,    3,        4,        5,   6]
+    #[rowid, listing, user, location, timestamp,type,details,image[0]]
+    #[0,     1,       2,    3,        4,        5,   6,      7]
+    print(products[0][7])
+    print("why")
     return render_template("home.html",products=products, services=services,success=success,error=error)
 
 @app.route('/authenticate/', methods=['POST'])
@@ -91,7 +93,11 @@ def upload():
     location = request.form["location"]
     type = request.form["type"]
     details = request.form["details"]
+    listings.addListing(user,listing,location,type,details)
+    return render_template("upload.html",user=user,listing=listing,location=location,type=type,details=details)
     
+@app.route("/upload/",methods=['POST'])
+def uproad():
     id = listings.getNextID()
     
     
@@ -102,9 +108,11 @@ def upload():
     files = request.files.getlist("file")
     i = 0
 
+    
     for file in files:
         #print(file)
         filename = str(id) + str(i) + "." + file.filename[-3:]
+        listings.addImageToListing(id,filename)
         print(filename)
         print("-------")
         destination = "/".join([target, filename])
@@ -112,18 +120,8 @@ def upload():
         file.save(destination)
         i += 1
         
-
     print( os.listdir(os.path.join(app.root_path, 'static/images')))
-    return render_template("upload.html",user=user,listing=listing,location=location,type=type,details=details)
-    
-@app.route("/upload/",methods=['POST'])
-def uproad():
     user = session['Username']
-    listing = request.form["listing"]
-    location = request.form["location"]
-    type = request.form["type"]
-    details = request.form["details"]
-    listings.addListing(user,listing,location,type,details)
     return redirect(url_for("profile",username=user,success="addedListing"))
 
 
@@ -136,7 +134,7 @@ if __name__ == '__main__':
         c = db.cursor()
         print("Initializing database")
         c.execute("CREATE TABLE users (user TEXT, password TEXT)")
-        c.execute("CREATE TABLE watchlist (user TEXT, id INTEGER, type TEXT)")
+        c.execute("CREATE TABLE watchlist (user TEXT, id INTEGER)")
         c.execute("CREATE TABLE listings (listing TEXT, user TEXT, location TEXT, timestamp TEXT, type TEXT, details TEXT)")
         c.execute("CREATE TABLE images (id INTEGER, image TEXT)")
         c.execute("CREATE TABLE comments (id INTEGER, user TEXT, comment TEXT, timestamp TEXT)")

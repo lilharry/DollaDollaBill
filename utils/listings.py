@@ -34,6 +34,20 @@ def addImageToListing(id,image):
     db.commit()
     db.close()
     return 0
+    
+def getImagesFromListing(id):
+    data = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    c.execute("SELECT image FROM images WHERE id=?",(id,))
+    for x in c:
+        data.append(x[0])
+        
+    db.close()
+    if not data:
+        return [0]
+    else:
+        return data 
 
 def addComment(id,user,comment):
     db = sqlite3.connect("data/database.db")
@@ -53,34 +67,41 @@ def addToWatchlist(user,id,type):
     db.close()
     return 0
 
-def getListingInfo(listing):
+def getListingInfo(listing,type):
     info = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT * FROM listings WHERE listing=?",(listing,))
+    c.execute("SELECT rowid, * FROM listings WHERE listing=? AND type=?",(listing,type))
     for x in c:
-        info.append(x)
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],)
+        info.append(x)    
     db.close()
+
     return info
 
-def getListingInfoId(id):
+def getListingInfoId(id,type):
     info = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT * FROM listings WHERE rowid=?",(id,))
+    c.execute("SELECT rowid, * FROM listings WHERE rowid=? AND type=?",(id,type))
     for x in c:
-        info.append(x)
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],)
+        info.append(x)    
     db.close()
     return info
-
 def getListingsP(user):
     info = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
     c.execute("SELECT rowid, * FROM listings WHERE user=? and type='product'",(user,))
     for x in c:
-        info.append(x)
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],)
+        info.append(x)    
     db.close()
+
     return info
     
 def getListingsS(user):
@@ -89,7 +110,9 @@ def getListingsS(user):
     c = db.cursor() 
     c.execute("SELECT rowid, * FROM listings WHERE user=? and type='service'",(user,))
     for x in c:
-        info.append(x)
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],)
+        info.append(x)    
     db.close()
     return info
 
@@ -97,9 +120,9 @@ def getWatchlistP(user):
     watchlist = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT id FROM watchlist WHERE user=? and type='product'",(user,))
+    c.execute("SELECT id FROM watchlist WHERE user=?",(user,))
     for x in c:
-        watchlist.append(getListingInfo(x[0]))
+        watchlist.append(getListingInfoId(x[0]),'product')
     db.close()
     return watchlist
     
@@ -107,9 +130,9 @@ def getWatchlistS(user):
     watchlist = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT id FROM watchlist WHERE user=? and type='service'",(user,))
+    c.execute("SELECT id FROM watchlist WHERE user=?",(user,))
     for x in c:
-        watchlist.append(getListingInfo(x[0]))
+        watchlist.append(getListingInfoId(x[0],'service'))
     db.close()
     return watchlist
 
@@ -134,8 +157,12 @@ def getProducts():
     c = db.cursor()
     data = c.execute("SELECT ROWID, * FROM listings WHERE type='product'")
     for x in c:
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],)
         listings.append(x)   
+        
     db.close()
+
     return listings
 
 def getServices():
@@ -145,8 +172,11 @@ def getServices():
     c = db.cursor()
     data = c.execute("SELECT ROWID, * FROM listings WHERE type='service'")
     for x in c:
-        listings.append(x)   
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],)
+        listings.append(x)     
     db.close()
+
     return listings
 
 def deleteAllListings():
@@ -164,6 +194,8 @@ def getNextID():
         db.close()  
         return x[0] + 1
 
+
+        
 if __name__ == '__main__':
     os.chdir('..')
     deleteAllListings()
