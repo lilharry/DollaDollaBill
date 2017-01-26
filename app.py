@@ -74,7 +74,7 @@ def profile(username):
 
 @app.route('/listings/<id>/')
 def listing(id):
-    data = listings.getListingInfoId(id)
+    data = listings.getListingInfoId(id)[0]
     #[rowid, listing, user, location, timestamp,type,details]
     #[0,     1,       2,    3,        4,        5,   6]
     comments = listings.getCommentsFor(id)

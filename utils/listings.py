@@ -100,8 +100,9 @@ def getListingInfoId(id):
 def contain(text):
     data = []
     db = sqlite3.connect("data/database.db")
-    c = db.cursor() 
-    c.execute("SELECT rowid FROM listings WHERE ? in listing",(text,))
+    c = db.cursor()
+    text = "%" + text + "%"
+    c.execute("SELECT rowid FROM listings WHERE listing LIKE ?",(text,))
     for x in c:
         data.append(getListingInfoId(x))
     db.close()
