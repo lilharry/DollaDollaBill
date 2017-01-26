@@ -2,8 +2,14 @@
                     Devlog
 -------------------------------------------------------------------------------
 Format: firstL -- TIMESTAMP
-ziyanL -- 2017-1-13 @12:30
-  Finished post.html, YeKai's version of listing.html was better suited for our website so we implemented that instead. Post method & ID added to app.py. Small touches upload.html.
+harryL -- 2017-1-25 @12:30
+  Finished majority of listing.py and app.py. Made comment and like functions
+
+ziyanL -- 2017-1-25 @12:30
+  Finished post.html, YeKai's version of listing.html was better suited for our website so we implemented that instead. Post method & ID added to app.py. Small touches upload.html. Search method. Video. 
+
+yikaiW -- 2017-1-25 @12:30
+  Finished all front end templates
 
 ziyanL -- 2017-1-13 @12:30
   Additions to post.html and listing.html. Item.css added.
