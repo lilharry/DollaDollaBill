@@ -167,7 +167,6 @@ def clearWatchlist(user):
 
 def getServices():
     listings = []
-
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
     data = c.execute("SELECT ROWID, * FROM listings WHERE type='service'")
@@ -176,7 +175,6 @@ def getServices():
         x = x + (image[0],)
         listings.append(x)     
     db.close()
-
     return listings
 
 def deleteAllListings():
@@ -194,8 +192,6 @@ def getNextID():
     for x in data:
         db.close()  
         return x[0] + 1
-
-
         
 if __name__ == '__main__':
     os.chdir('..')
