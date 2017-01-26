@@ -76,6 +76,7 @@
 
       <div class="games">
           <div class="container-fluid" id="homepageContainer">
+            {% if results %}
   <div class="row grid-divider">
       <div class="col-sm-5 col-xs-offset-1">
      <h3>Products:</h3>
@@ -136,6 +137,9 @@
     {% endif %}
    {% endfor %}
   </div>
+  {% else %}
+  <h2 class="featured" style="text-indent: 12%;">None</h2>
+  {% endif %}
   </div>
   </div>
 
