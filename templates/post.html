@@ -89,7 +89,7 @@
     <b>Title:</b>
     <input type = "text" name = "listing" placeholder = "almostMoney" required></center>
     <br><br>
-    <select name="type">
+    <select name="type" required>
         <option value="product">Product</option>
         <option value="service">Service</option>
     </select>
@@ -97,10 +97,10 @@
   <br>
       <b>Summary:</b>
       <br>
-      <textarea class="jumbotron" rows="4" cols="30" name="details" placeholder = "Waste your money on this because..."></textarea>
+      <textarea class="jumbotron" rows="4" cols="30" name="details" placeholder = "Waste your money on this because..." required></textarea>
      <b>Location:</b>
      <br>
-     <input id="autocomplete" placeholder="Location" type="text" name="location">
+     <input id="autocomplete" placeholder="Location" type="text" name="location" required>
      <br><br>
     <center><input type= "submit" class="btn btn-success" value= "Submit Item"></center>
   </form>
