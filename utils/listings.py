@@ -99,17 +99,31 @@ def getListingInfoId(id):
     db.close()
     return info
 
-def contain(text):
+def containP(text):
     data = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
     text = "%" + text + "%"
-    c.execute("SELECT rowid FROM listings WHERE listing LIKE ?",(text,))
-    for x in c:
-        data.append(getListingInfoId(x))
+    c.execute("SELECT rowid, * FROM listings WHERE listing LIKE ? AND type='product'",(text,))
+    for x in c: 
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],numComments(x[0]),numLikes(x[0]),)
+        data.append(x)
     db.close()
     return data
-
+    
+def containS(text):
+    data = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    text = "%" + text + "%"
+    c.execute("SELECT rowid, * FROM listings WHERE listing LIKE ? AND type='service'",(text,))
+    for x in c: 
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],numComments(x[0]),numLikes(x[0]),)
+        data.append(x)
+    db.close()
+    return data
     
 def getProducts():
     listings = []

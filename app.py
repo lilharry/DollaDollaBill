@@ -94,8 +94,9 @@ def logout():
 
 @app.route('/search/')
 def search():
-    re = listings.contain(request.args.get("search"))
-    return render_template('search.html', results= re)
+    products = listings.containP(request.args.get("search"))
+    services = listings.containS(request.args.get("search"))
+    return render_template('search.html', products=products,services=services)
 
 
 @app.route("/postitem/", methods=['POST'])
