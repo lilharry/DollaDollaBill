@@ -76,18 +76,23 @@ def listing(id):
     data = getListingInfoId(id)
     return render_template("listing.html",listing=data)
 
-@app.route('/postitem/')
+@app.route('/postitem/',methods=['POST'])
 def post():
-    return 0
+    user = session['Username']
+    listing = request.form["listing"]
+    location = request.form["location"]
+    type = request.form["type"]
+    details = request.form["details"]
+    
+    id = listings.addListing(user,listing,location,type,details)
+    return render_template('upload.html',listing=listing,id=id)
 
 @app.route('/logout/')
 def logout():
     session.pop("Username")
     return redirect(url_for('homepage',success="You have successfully logged out"))
-
-
-'''    
-@app.route("/upload/", methods=['POST'])
+'''
+@app.route("/postitem/")
 def upload():
     target = os.path.join(APP_ROOT, 'static/')
     if not os.path.isdir(target):
@@ -109,9 +114,9 @@ def upload():
     return render_template("confirm.html", title = "Almost There!", more = "Check if the emails correspond to the files:",
         filelist = os.listdir(os.path.join(APP_ROOT, 'uploaded/')), emails = tempList, mailingList = tempList, subject = tempsubject, msg_body = tempmsg_body)
         
+
 def delete():
     files = os.listdir(os.path.join(APP_ROOT, 'uploaded/'))
-
     for file in files:
         print file
         print files

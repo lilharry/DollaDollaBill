@@ -9,11 +9,14 @@ def addListing(user, listing, location, type, details):
     
     timestamp = datetime.datetime.fromtimestamp(time.time()).strftime("%m-%d-%Y %H:%M")
     
-    c.execute("INSERT INTO listings VALUES (?,?,?,?,?,?)",(listing,user,location,timestamp,type,details))
-    
+    c.execute("INSERT INTO listings VALUES (?,?,?,?,?,?)",(listing,user,location,timestamp,type,details,))
+    c.execute("SELECT rowid FROM listings WHERE user=? AND timestamp=?",(user,timestamp,))
+    rowid = -1
+    for x in c:
+        rowid = x[0]
     db.commit()
     db.close()
-    return 0
+    return rowid
 
 def removeListing(id):
     db = sqlite3.connect("data/database.db")
@@ -74,7 +77,7 @@ def getListingsP(user):
     info = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT * FROM listings WHERE user=? and type='product'",(user,))
+    c.execute("SELECT rowid, * FROM listings WHERE user=? and type='product'",(user,))
     for x in c:
         info.append(x)
     db.close()
@@ -84,7 +87,7 @@ def getListingsS(user):
     info = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT * FROM listings WHERE user=? and type='service'",(user,))
+    c.execute("SELECT rowid, * FROM listings WHERE user=? and type='service'",(user,))
     for x in c:
         info.append(x)
     db.close()
