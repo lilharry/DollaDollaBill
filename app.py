@@ -79,12 +79,13 @@ def listing(id):
     #[0,     1,       2,    3,        4,        5,   6]
     comments = listings.getCommentsFor(id)
     success = request.args.get('success') 
-    
-    user = session['Username']
-    liked = listings.alreadyLiked(user,id)
-    watchlisted = listings.alreadyWatchlisted(user,id)
-    return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted)
-
+    if 'Username' in session:
+        user = session['Username']
+        liked = listings.alreadyLiked(user,id)
+        watchlisted = listings.alreadyWatchlisted(user,id)
+        return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted)
+    else:
+        return render_template("listing.html",listing=data,id=id,comments=comments,success=success)
 
 @app.route('/logout/')
 def logout():
