@@ -24,6 +24,8 @@ def login(user, password):
     
     return "User does not exist"#error message
 
+
+
 def register(user, password):
     db = connect(f)
     c = db.cursor()

@@ -15,7 +15,7 @@ def homepage():
     services = listings.getServices()
     #[rowid, listing, user, location, timestamp,type,details]
     #[0,     1,       2,    3,        4,        5,   6]
-    return render_template("home - test.html",products=products, services=services,success=success,error=error)
+    return render_template("home.html",products=products, services=services,success=success,error=error)
 
 @app.route('/authenticate/', methods=['POST'])
 def authenticate():
@@ -50,28 +50,41 @@ def results():
     return render_template("results.html")#,results)
         
 
-@app.route('/create/<id>')
-def create(id):
-	return render_template("post.html")
-		
+@app.route('/create/')
+def create():
+    return render_template("post.html")
+        
+@app.route('/profile/')
+def myProfile():
+    if 'Username' in session:
+        return redirect(url_for('profile',username=session['Username']))
+    else:
+        return redirect(url_for('homepage',error="You must log in first"))
+        
+@app.route('/profile/<username>/')
+def profile(username):
+    if not login.duplicate(username):
+        return redirect(url_for('homepage', error="No such user"))
+    mp = listings.getListingsP(username)
+    ms = listings.getListingsS(username)
+    wp = listings.getWatchlistP(username)
+    ws = listings.getWatchlistS(username)
+    return render_template('profile.html',username=username,mp=mp,ms=ms,wp=wp,ws=ws)
 
 @app.route('/listing/<id>/')
 def listing(id):
-	return render_template("listing.html");
+    data = getListingInfoId(id)
+    return render_template("listing.html",listing=data)
 
 @app.route('/postitem/')
 def post():
-	db = sqlite3.connect('data/data.db')
-	a = db.cursor()
-	b = request.form['name']
-	c = request.form['condition']
-	d = request.form['price']
-	e = request.form['Summary']
-	f = request.form['Location']
-	a.execute("CREATE TABLE items (item TEXT, condition TEXT, price INTEGER, Summary TEXT, Location TEXT) IF NOT EXISTS items")
-	a.execute("INSERT INTO items VALUES('%s',%s,%d, %s, %s)")%(b, c, d, e, f)
-	db.commit()
-	db.close()
+    return 0
+
+@app.route('/logout/')
+def logout():
+    session.pop("Username")
+    return redirect(url_for('homepage',success="You have successfully logged out"))
+
 
 '''    
 @app.route("/upload/", methods=['POST'])
@@ -117,7 +130,7 @@ if __name__ == '__main__':
         c = db.cursor()
         print("Initializing database")
         c.execute("CREATE TABLE users (user TEXT, password TEXT)")
-        c.execute("CREATE TABLE watchlist (user TEXT, game INTEGER)")
+        c.execute("CREATE TABLE watchlist (user TEXT, id INTEGER, type TEXT)")
         c.execute("CREATE TABLE listings (listing TEXT, user TEXT, location TEXT, timestamp TEXT, type TEXT, details TEXT)")
         c.execute("CREATE TABLE images (id INTEGER, image TEXT)")
         c.execute("CREATE TABLE comments (id INTEGER, user TEXT, comment TEXT, timestamp TEXT)")

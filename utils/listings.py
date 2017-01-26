@@ -35,8 +35,6 @@ def addImageToListing(id,image):
 def addComment(id,user,comment):
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    
-    
     timestamp = datetime.datetime.fromtimestamp(time.time()).strftime("%m-%d-%Y %H:%M")  
     c.execute("INSERT INTO comments VALUES (?,?,?,?)",(id,user,comment,timestamp,))
     
@@ -44,24 +42,13 @@ def addComment(id,user,comment):
     db.close()
     return 0
 
-def addToWatchlist(user,id):
+def addToWatchlist(user,id,type):
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("INSERT INTO watchlist VALUES (?,?)",(user,id,))
+    c.execute("INSERT INTO watchlist VALUES (?,?,?)",(user,id,type))
     db.commit()
     db.close()
     return 0
-
-def getWatchlist(user):
-    watchlist = []
-    db = sqlite3.connect("data/database.db")
-    c = db.cursor() 
-    c.execute("SELECT id FROM watchlist WHERE user=?",(user,))
-    for x in c:
-        watchlist.append(getListingInfo(x[0]))
-    db.close()
-    return watchlist
-    
 
 def getListingInfo(listing):
     info = []
@@ -83,6 +70,46 @@ def getListingInfoId(id):
     db.close()
     return info
 
+def getListingsP(user):
+    info = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    c.execute("SELECT * FROM listings WHERE user=? and type='product'",(user,))
+    for x in c:
+        info.append(x)
+    db.close()
+    return info
+    
+def getListingsS(user):
+    info = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    c.execute("SELECT * FROM listings WHERE user=? and type='service'",(user,))
+    for x in c:
+        info.append(x)
+    db.close()
+    return info
+
+def getWatchlistP(user):
+    watchlist = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    c.execute("SELECT id FROM watchlist WHERE user=? and type='product'",(user,))
+    for x in c:
+        watchlist.append(getListingInfo(x[0]))
+    db.close()
+    return watchlist
+    
+def getWatchlistS(user):
+    watchlist = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    c.execute("SELECT id FROM watchlist WHERE user=? and type='service'",(user,))
+    for x in c:
+        watchlist.append(getListingInfo(x[0]))
+    db.close()
+    return watchlist
+
 def removeWatchlist(user,id):
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
@@ -100,7 +127,6 @@ def clearWatchlist(user):
     
 def getProducts():
     listings = []
-    
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
     data = c.execute("SELECT ROWID, * FROM listings WHERE type='product'")
@@ -111,7 +137,7 @@ def getProducts():
 
 def getServices():
     listings = []
-    
+
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
     data = c.execute("SELECT ROWID, * FROM listings WHERE type='service'")
