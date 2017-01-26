@@ -83,7 +83,11 @@ def listing(id):
         user = session['Username']
         liked = listings.alreadyLiked(user,id)
         watchlisted = listings.alreadyWatchlisted(user,id)
-        return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted)
+        if user == data[2]:
+            owner = True
+            return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted,owner=owner)
+        else:
+            return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted)
     else:
         return render_template("listing.html",listing=data,id=id,comments=comments,success=success)
 
@@ -166,8 +170,12 @@ def watchlist(id):
     else:
         listings.removeFromWatchlist(user,id)
         return redirect(url_for("listing",id=id,success="Removed from Watchlist"))
-        
-    
+
+@app.route("/delete/<id>")
+def delete(id):
+    listings.removeListing(id)
+    return redirect(url_for("homepage",success="Removed listing"))
+                    
 if __name__ == '__main__':
     if os.path.getsize("data/database.db") == 0:
         f = "data/database.db"

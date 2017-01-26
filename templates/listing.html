@@ -91,16 +91,18 @@
 
 
         <div class="well">
-          <a href="#"><input type= "submit" class="btn btn-info" style="clear: right; float: right;" value= "Add to Watchlist"></a>
+          <a href="/watchlist/{{id}}"><input type= "submit" class="btn btn-info" style="clear: right; float: right;" value=
+					     {% if not watchlisted %} "Add to Watchlist" {%else%} "Remove from Watchlist" {%endif%}> </a>
 
 
           <a href="/like/{{id}}/"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value=
           {% if not liked %} "Like This Post" {%else%} "Unlike This Post" {%endif%}> </a>
 
-
-          <a href="#"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value="Remove Post"></a>
+	  {% if owner %}
+	  
+          <a href="/delete/<id>"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value="Remove Post"></a>
           <br>
-
+	  {% endif %}
       <div class="media">
       		<h4 class="media-heading">{{listing[1]}}</h4>
     		<img class="media-object detailimg" src="/static/images/{{listing[7]}}">
@@ -142,7 +144,7 @@
                     <input type="hidden" name="id" value="{{id}}">
                     <input class="form-control" name="comment" placeholder="Add a comment" type="text">
                     <span class="input-group-addon">
-                        <input type="submit" class="btn btn-outline-secondary">
+                        <input type="submit" class="btn btn-outline-secondary" value="Add comment">
                     </span>
                 </div>
       </form>

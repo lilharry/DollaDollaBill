@@ -21,8 +21,18 @@ def addListing(user, listing, location, type, details):
 def removeListing(id):
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
+
+    images = getImagesFromListing(id)
+    os.chdir('static/images')
+    for image in images:
+        os.remove(image)
+    os.chdir("../..")
     c.execute("DELETE FROM listings WHERE rowid=?",(id,))
-    
+    c.execute("DELETE FROM images WHERE id=?",(id,))
+    c.execute("DELETE FROM comments WHERE id=?",(id,))
+    c.execute("DELETE FROM watchlist WHERE id=?",(id,))
+    c.execute("DELETE FROM likes WHERE id=?",(id,))
+
     db.commit()
     db.close()
     return 0
@@ -206,7 +216,7 @@ def getServices():
     data = c.execute("SELECT ROWID, * FROM listings WHERE type='service'")
     for x in c:
         image = getImagesFromListing(x[0])
-        x = x + (image[0],)
+        x = x + (image[0],numComments(x[0]),numLikes(x[0]),)
         listings.append(x)     
     db.close()
     return listings
