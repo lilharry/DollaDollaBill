@@ -94,7 +94,7 @@ def logout():
 
 @app.route('/search/')
 def search():
-    re = listings.contain(request.form["search"])
+    re = listings.contain(request.args.get("search"))
     return render_template('search - test.html', results= re)
 
 
