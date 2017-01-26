@@ -27,11 +27,13 @@
                         <div class="form-group has-feedback">
                             <label for="search" class="sr-only">Search</label>
                             <input type="text" class="form-control" name="search" placeholder="Search:">
+                            <input type="submit" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" />
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
                     </form>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
+		{% if 'Username' not in session %}
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">Login<span class="caret"></span></a>
                         <ul id="login-dp" class="dropdown-menu">
@@ -58,12 +60,20 @@
                             </li>
                         </ul>
                     </li>
+                    {% else %}
                     <!--  Login for navbar -->
                     <li><a href="/logout/">Logout</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
-
+        {% if success %}
+        <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{success}}
+        </div>
+        {% endif %}
         <div class="jumbotron text-center">
             <h1 id="h1Jumbo"> Dolla Dolla Bill </h1>
             <h3 id="h3Jumbo">A free market</h3>
@@ -82,7 +92,13 @@
 
         <div class="well">
           <a href="#"><input type= "submit" class="btn btn-info" style="clear: right; float: right;" value= "Add to Watchlist"></a>
-          <a href="#"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value= "Like This Post"></a>
+
+
+          <a href="/like/{{id}}/"><input type= "submit" class="btn btn-info" style="margin-right: 20px; float: right;" value=
+          {% if not liked %} "Like This Post" {%else%} "Unlike This Post" {%endif%}> </a>
+
+          <br>
+
       <div class="media">
       		<h4 class="media-heading">{{listing[1]}}</h4>
     		<img class="media-object detailimg" src="/static/images/{{listing[7]}}">
@@ -92,12 +108,12 @@
        </div>
     </div>
     <ul class="list-inline list-unstyled detailaddit">
-    			<li><span><i class="glyphicon glyphicon-calendar"></i>{{listing[4]}}</span></li>
+    			<li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
               <li>|</li>
-              <span><i class="glyphicon glyphicon-comment"></i> 20 comments </span>
+              <span><i class="glyphicon glyphicon-comment"></i>  {{listing[8]}}</span>
               <li>|</li>
               <li>
-                 <span><i class="glyphicon glyphicon-thumbs-up"></i> 420</span>
+                 <span><i class="glyphicon glyphicon-thumbs-up"></i> {{listing[9]}}</span>
               </li>
   			</ul>
 
@@ -107,33 +123,36 @@
 		    <div class="blog-comment">
 				<h3>Comments</h3>
 				<ul class="comments">
+                {% for comment in comments %}
 				<li class="clearfix">
 				  <div class="post-comments">
-				      <p class="meta">Dec 18, 2014 <a href="#">JohnDoe</a> says :</p>
+				      <p class="meta"><a href="/profile/{{comment[1]}}">{{comment[1]}}</a> on {{comment[3]}} says :</p>
 				      <p>
-				          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-				          Etiam a sapien odio, sit amet
+				          {{comment[2]}}
 				      </p>
 				  </div>
 				</li>
-				<li class="clearfix">
-				  <div class="post-comments">
-				      <p class="meta">Dec 19, 2014 <a href="#">JohnDoe</a> says :</p>
-				      <p>
-				          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-				          Etiam a sapien odio, sit amet
-				      </p>
-				  </div>
-				</li>
+                {% endfor %}
 				</ul>
-        <form action="" method="post">
+        {% if 'Username' in session %}
+        <form action="/comment/" method="post">
           <div class="input-group">
-                    <input class="form-control" placeholder="Add a comment" type="text">
+                    <input type="hidden" name="id" value="{{id}}">
+                    <input class="form-control" name="comment" placeholder="Add a comment" type="text">
                     <span class="input-group-addon">
                         <input type="submit" class="btn btn-outline-secondary">
                     </span>
                 </div>
       </form>
+      {%else%}
+         <li class="clearfix">
+				  <div class="post-comments">
+				      <p>
+				          Log in to add comments!
+				      </p>
+				  </div>
+	     </li>
+      {% endif %}
 			</div>
 		</div>
 	</div>

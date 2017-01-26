@@ -39,7 +39,6 @@ harryL -- 2017-1-10 @12:34
 yikaiW -- 2017-1-12 @12:35
        fixed columns
 
-
 yikaiW -- 2017-1-17 @12:35
 	Added listing summary
 
@@ -48,3 +47,7 @@ yikaiW -- 2017-1-18 @12:34
 
 yikaiW -- 2017-1-19 @12:34
 	Modified comments
+
+yikaiW -- 2017-1-25@12:34
+	Edited posts.html (modified fields)
+	Added liking feature and create listing button, and add to watchlist feature.

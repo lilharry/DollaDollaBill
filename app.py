@@ -69,14 +69,20 @@ def profile(username):
     ms = listings.getListingsS(username)
     wp = listings.getWatchlistP(username)
     ws = listings.getWatchlistS(username)
-    return render_template('profile.html',username=username,mp=mp,ms=ms,wp=wp,ws=ws)
+    success = request.args.get('success') 
+    return render_template('profile.html',username=username,mp=mp,ms=ms,wp=wp,ws=ws,success=success)
 
 @app.route('/listings/<id>/')
 def listing(id):
     data = listings.getListingInfoId(id)
     #[rowid, listing, user, location, timestamp,type,details]
     #[0,     1,       2,    3,        4,        5,   6]
-    return render_template("listing.html",listing=data)
+    comments = listings.getCommentsFor(id)
+    success = request.args.get('success') 
+    
+    user = session['Username']
+    liked = listings.alreadyLiked(user,id)
+    return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked)
 
 
 @app.route('/logout/')
@@ -126,11 +132,29 @@ def uproad():
         
     print( os.listdir(os.path.join(app.root_path, 'static/images')))
     user = session['Username']
-    return redirect(url_for("profile",username=user,success="addedListing"))
+    return redirect(url_for("profile",username=user,success="Successfully added listing"))
+
+@app.route("/comment/",methods=['POST'])
+def comment():
+    user = session['Username']
+    id = int(request.form["id"])
+    comment = request.form["comment"]
+    listings.addComment(id,user,comment)
+    return redirect(url_for("listing",id=id,success="Comment added"))
 
 
-
-
+@app.route("/like/<id>/")
+def like(id):
+    user = session['Username']
+    
+    if not listings.alreadyLiked(user,id):
+        listings.likePost(user,id)
+        return redirect(url_for("listing",id=id,success="Like added"))
+    else:
+        listings.unlikePost(user,id)
+        return redirect(url_for("listing",id=id,success="Like removed"))
+        
+    
 if __name__ == '__main__':
     if os.path.getsize("data/database.db") == 0:
         f = "data/database.db"
@@ -142,6 +166,7 @@ if __name__ == '__main__':
         c.execute("CREATE TABLE listings (listing TEXT, user TEXT, location TEXT, timestamp TEXT, type TEXT, details TEXT)")
         c.execute("CREATE TABLE images (id INTEGER, image TEXT)")
         c.execute("CREATE TABLE comments (id INTEGER, user TEXT, comment TEXT, timestamp TEXT)")
+        c.execute("CREATE TABLE likes (id INTEGER, user TEXT)")
         db.commit()
         db.close()
     app.debug = True

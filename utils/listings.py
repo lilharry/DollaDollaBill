@@ -61,26 +61,27 @@ def addComment(id,user,comment):
     db.close()
     return 0
 
+def getCommentsFor(id):
+    ans = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+
+    data = c.execute("SELECT * FROM comments WHERE id=?",(id,))
+    for x in data:
+        ans.append(x)
+    db.close()
+    return ans
+    
+def numComments(id):
+    return len(getCommentsFor(id))
+    
 def addToWatchlist(user,id,type):
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("INSERT INTO watchlist VALUES (?,?,?)",(user,id,type))
+    c.execute("INSERT INTO watchlist VALUES (?,?,?)",(user,id,))
     db.commit()
     db.close()
     return 0
-
-def getListingInfo(listing,type):
-    info = []
-    db = sqlite3.connect("data/database.db")
-    c = db.cursor() 
-    c.execute("SELECT rowid, * FROM listings WHERE listing=? AND type=?",(listing,type))
-    for x in c:
-        image = getImagesFromListing(x[0])
-        x = x + (image[0],)
-        info.append(x)    
-    db.close()
-
-    return info
 
 def getListingInfoId(id):
     info = []
@@ -89,9 +90,12 @@ def getListingInfoId(id):
     c.execute("SELECT rowid, * FROM listings WHERE rowid=?",(id,))
     for x in c:
         image = getImagesFromListing(x[0])
-        x = x + (image[0],)
-        info.append(x)    
+        x = x + (image[0],numComments(x[0]),numLikes(x[0]),)
+        
+        
+        info.append(x)   
     db.close()
+<<<<<<< HEAD
     return info
 
 def contain(text):
@@ -103,6 +107,9 @@ def contain(text):
         data.append(getListingInfoId(x))
     db.close()
     return data
+=======
+    return info[0]
+>>>>>>> 858b86e2b8dbbf70a14dea39b9479506c646b047
     
 def getProducts():
     listings = []
@@ -111,7 +118,7 @@ def getProducts():
     data = c.execute("SELECT ROWID, * FROM listings WHERE type='product'")
     for x in c:
         image = getImagesFromListing(x[0])
-        x = x + (image[0],)
+        x = x + (image[0],numComments(x[0]),numLikes(x[0]),)
         listings.append(x)   
     db.close()
     return listings
@@ -123,7 +130,7 @@ def getListingsP(user):
     c.execute("SELECT ROWID, * FROM listings WHERE user=? and type='product'",(user,))
     for x in c:
         image = getImagesFromListing(x[0])
-        x = x + (image[0],)
+        x = x + (image[0],numComments(x[0]),numLikes(x[0]),)
         info.append(x)    
     db.close()
     return info
@@ -135,7 +142,7 @@ def getListingsS(user):
     c.execute("SELECT rowid, * FROM listings WHERE user=? and type='service'",(user,))
     for x in c:
         image = getImagesFromListing(x[0])
-        x = x + (image[0],)
+        x = x + (image[0],numComments(x[0]),numLikes(x[0]),)
         info.append(x)    
     db.close()
     return info
@@ -174,8 +181,6 @@ def clearWatchlist(user):
     db.commit()
     db.close()
 
-    
-
 
 def getServices():
     listings = []
@@ -204,10 +209,53 @@ def getNextID():
     for x in data:
         db.close()  
         return x[0] + 1
-        
+
+
+def likePost(user,id):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    if not alreadyLiked(user,id):
+        c.execute("INSERT INTO likes VALUES (?,?)",(id,user,))
+        db.commit()
+        db.close()
+    return 0
+    
+def unlikePost(user,id):
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    if alreadyLiked(user,id):
+        c.execute("DELETE FROM likes WHERE id=? AND user=?",(id,user,))
+        db.commit()
+        db.close()
+    return 0
+    
+def alreadyLiked(user,id):
+    info = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    data = c.execute("SELECT * FROM likes WHERE id=? AND user=?",(id,user,))
+    for x in data:
+        info.append(x)
+    db.close()
+    
+    if len(info) > 0:
+        return True
+    else:
+        return False
+
+def numLikes(id):
+    info = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    data = c.execute("SELECT * FROM likes WHERE id=?",(id,))
+    for x in data:
+        info.append(x)
+    db.close()
+    return len(info)
+    
+    
 if __name__ == '__main__':
     os.chdir('..')
-    print(getListingsP('eb'))
     
 
    

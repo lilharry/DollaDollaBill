@@ -26,7 +26,12 @@
                     <form action="/search/" class="search-form">
                         <div class="form-group has-feedback">
                             <label for="search" class="sr-only">Search</label>
+<<<<<<< HEAD
                             <input type="text" class="form-control" name="search" placeholder="Search:" value = "search">
+=======
+                            <input type="text" class="form-control" name="search" placeholder="Search:">
+                            <input type="submit" style="height: 0px; width: 0px; border: none; padding: 0px;" hidefocus="true" />
+>>>>>>> 858b86e2b8dbbf70a14dea39b9479506c646b047
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         </div>
                     </form>
@@ -119,12 +124,12 @@
           <p class="by">By {{listing[2]}}, in {{listing[3]}}</p>
           <p>{{listing[6]}}</p>
           <ul class="list-inline list-unstyled">
-  			<li><span><i class="glyphicon glyphicon-calendar"></i>{{listing[4]}}</span></li>
+  			<li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
             <li>|</li>
-            <span><i class="glyphicon glyphicon-comment"></i> 20 comments </span>
+            <span><i class="glyphicon glyphicon-comment"></i>  {{listing[8]}}</span>
             <li>|</li>
             <li>
-               <span><i class="glyphicon glyphicon-thumbs-up"></i> 420</span>
+               <span><i class="glyphicon glyphicon-thumbs-up"></i> {{listing[9]}}</span>
             </li>
 			</ul>
        </div>
@@ -151,12 +156,12 @@
           <p class="by">By {{listing[2]}}, in {{listing[3]}}</p>
           <p>{{listing[6]}}</p>
           <ul class="list-inline list-unstyled">
-  			<li><span><i class="glyphicon glyphicon-calendar"></i>{{listing[4]}}</span></li>
+  			<li><span><i class="glyphicon glyphicon-calendar"></i> {{listing[4]}}</span></li>
             <li>|</li>
-            <span><i class="glyphicon glyphicon-comment"></i> 20 comments </span>
+            <span><i class="glyphicon glyphicon-comment"></i> {{listing[8]}}</span>
             <li>|</li>
             <li>
-               <span><i class="glyphicon glyphicon-thumbs-up"></i> 420</span>
+               <span><i class="glyphicon glyphicon-thumbs-up"></i> {{listing[9]}}</span>
             </li>
 			</ul>
        </div>
