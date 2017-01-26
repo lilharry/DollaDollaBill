@@ -80,7 +80,7 @@ def getListingInfo(listing,type):
 
     return info
 
-def getListingInfoId(id,type):
+def getListingInfoId(id):
     info = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
