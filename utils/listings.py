@@ -27,6 +27,8 @@ def removeListing(id):
     db.close()
     return 0
 
+
+
 def addImageToListing(id,image):
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
@@ -91,6 +93,16 @@ def getListingInfoId(id):
         info.append(x)    
     db.close()
     return info
+
+def contain(text):
+    data = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    c.execute("SELECT rowid FROM listings WHERE ? in listing",(text,))
+    for x in c:
+        data.append(getListingInfoId(x))
+    db.close()
+    return data
     
 def getProducts():
     listings = []
