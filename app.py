@@ -15,8 +15,6 @@ def homepage():
     services = listings.getServices()
     #[rowid, listing, user, location, timestamp,type,details,image[0]]
     #[0,     1,       2,    3,        4,        5,   6,      7]
-    print(products[0][7])
-    print("why")
     return render_template("home.html",products=products, services=services,success=success,error=error)
 
 @app.route('/authenticate/', methods=['POST'])
