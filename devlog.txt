@@ -45,6 +45,9 @@ harryL -- 2017-1-10 @12:34
 yikaiW -- 2017-1-12 @12:35
        fixed columns
 
+harryL -- 2017-1-25 @17:34
+  Add remove functions to watchlist
+
 yikaiW -- 2017-1-17 @12:35
 	Added listing summary
 
@@ -52,8 +55,27 @@ yikaiW -- 2017-1-18 @12:34
 	Added comments
 
 yikaiW -- 2017-1-19 @12:34
-	Modified comments
+       Modified comments
+       
+ziyanL -- 2017-1-25 @14:40
+       Fix navbar
+
+harryL -- 2017-1-25 @17:34
+  Add watchlist to profile page
+  Add listing page
 
 yikaiW -- 2017-1-25@12:34
 	Edited posts.html (modified fields)
 	Added liking feature and create listing button, and add to watchlist feature.
+
+ziyanL -- 2017-1-26 @3:30
+  Add search function
+  Add search bar to navbar
+
+harryL -- 2017-1-26 @4:25
+  Add functions for liking and commenting
+  Add app routes for liking and commenting
+  Fix listing route bug
+
+ziyanL -- 2017-1-26 @4:50
+  Create video
