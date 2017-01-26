@@ -73,10 +73,10 @@ def getCommentsFor(id):
 def numComments(id):
     return len(getCommentsFor(id))
     
-def addToWatchlist(user,id,type):
+def addToWatchlist(user,id):
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("INSERT INTO watchlist VALUES (?,?,?)",(user,id,))
+    c.execute("INSERT INTO watchlist VALUES (?,?)",(user,id,))
     db.commit()
     db.close()
     return 0
@@ -131,13 +131,28 @@ def getListingsS(user):
     db.close()
     return info
 
+def alreadyWatchlisted(user,id):
+    info = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor() 
+    data = c.execute("SELECT * FROM watchlist WHERE id=? AND user=?",(id,user,))
+    for x in data:
+        info.append(x)
+    db.close()
+    if len(info) > 0:
+        return True
+    else:
+        return False
+    
 def getWatchlistP(user):
     watchlist = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
     c.execute("SELECT id FROM watchlist WHERE user=?",(user,))
     for x in c:
-        watchlist.append(getListingInfoId(x[0]),'product')
+        info = getListingInfoId(x[0])
+        if info[5] == 'product'
+            watchlist.append(info)
     db.close()
     return watchlist
     
@@ -147,11 +162,13 @@ def getWatchlistS(user):
     c = db.cursor() 
     c.execute("SELECT id FROM watchlist WHERE user=?",(user,))
     for x in c:
-        watchlist.append(getListingInfoId(x[0],'service'))
+        info = getListingInfoId(x[0])
+        if info[5] == 'service'
+            watchlist.append(info)
     db.close()
     return watchlist
 
-def removeWatchlist(user,id):
+def removeFromWatchlist(user,id):
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
     data = c.execute("DELETE FROM watchlist WHERE user=? AND id=?",(user,id,))

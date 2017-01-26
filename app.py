@@ -82,7 +82,8 @@ def listing(id):
     
     user = session['Username']
     liked = listings.alreadyLiked(user,id)
-    return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked)
+    watchlisted = listings.alreadyWatchlisted(user,id)
+    return render_template("listing.html",listing=data,id=id,comments=comments,success=success,liked=liked,watchlisted=watchlisted)
 
 
 @app.route('/logout/')
@@ -147,6 +148,17 @@ def like(id):
     else:
         listings.unlikePost(user,id)
         return redirect(url_for("listing",id=id,success="Like removed"))
+        
+@app.route("/watchlist/<id>")
+def watchlist(id):
+    user = session['Username']
+    
+    if not listings.alreadyWatchlisted(user,id):
+        listings.addToWatchlist(user,id)
+        return redirect(url_for("listing",id=id,success="Added to watchlist"))
+    else:
+        listings.removeFromWatchlist(user,id)
+        return redirect(url_for("listing",id=id,success="Added to Watchlist"))
         
     
 if __name__ == '__main__':
