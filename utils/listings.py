@@ -39,15 +39,15 @@ def getImagesFromListing(id):
     data = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT image FROM images WHERE id=?",(id,))
-    for x in c:
+    a = c.execute("SELECT image FROM images WHERE id=?",(id,))
+    for x in a:
         data.append(x[0])
         
     db.close()
+    
     if not data:
-        return [0]
-    else:
-        return data 
+        return ["noimage.jpg"]
+    return data 
 
 def addComment(id,user,comment):
     db = sqlite3.connect("data/database.db")
@@ -91,6 +91,19 @@ def getListingInfoId(id):
         info.append(x)    
     db.close()
     return info
+    
+def getProducts():
+    listings = []
+    db = sqlite3.connect("data/database.db")
+    c = db.cursor()
+    data = c.execute("SELECT ROWID, * FROM listings WHERE type='product'")
+    for x in c:
+        image = getImagesFromListing(x[0])
+        x = x + (image[0],)
+        listings.append(x)   
+    db.close()
+    return listings
+    
 def getListingsP(user):
     info = []
     db = sqlite3.connect("data/database.db")
@@ -101,7 +114,6 @@ def getListingsP(user):
         x = x + (image[0],)
         info.append(x)    
     db.close()
-
     return info
     
 def getListingsS(user):
@@ -151,19 +163,7 @@ def clearWatchlist(user):
     db.close()
 
     
-def getProducts():
-    listings = []
-    db = sqlite3.connect("data/database.db")
-    c = db.cursor()
-    data = c.execute("SELECT ROWID, * FROM listings WHERE type='product'")
-    for x in c:
-        image = getImagesFromListing(x[0])
-        x = x + (image[0],)
-        listings.append(x)   
-        
-    db.close()
 
-    return listings
 
 def getServices():
     listings = []
@@ -182,7 +182,8 @@ def getServices():
 def deleteAllListings():
     db = sqlite3.connect("data/database.db")
     c = db.cursor()
-    data = c.execute("DELETE FROM listings")
+    c.execute("DELETE FROM listings")
+    c.execute("DELETE FROM images")
     db.commit()
     db.close()
     
@@ -199,15 +200,6 @@ def getNextID():
 if __name__ == '__main__':
     os.chdir('..')
     deleteAllListings()
-    addListing('john','jordans','brooklyn','product','hello')
-    addListing('yeeee kaii','smartwatch','canada','product','hello')
-    addListing('bro','elo boosting','NA','service','I got you with these services my dude')
-    print(getProducts())
-    print(getServices())
-    print(getNextID())
+
    
 #add user rating to listings
-    
-    
-    
-    

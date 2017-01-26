@@ -97,7 +97,7 @@ def upload():
     
 @app.route("/upload/",methods=['POST'])
 def uproad():
-    id = listings.getNextID()
+    id = listings.getNextID() - 1
     
     
     target = os.path.join(app.root_path, 'static/images')
