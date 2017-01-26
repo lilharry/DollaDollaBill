@@ -84,7 +84,7 @@ def getListingInfoId(id):
     info = []
     db = sqlite3.connect("data/database.db")
     c = db.cursor() 
-    c.execute("SELECT rowid, * FROM listings WHERE rowid=? AND type=?",(id,type))
+    c.execute("SELECT rowid, * FROM listings WHERE rowid=?",(id,))
     for x in c:
         image = getImagesFromListing(x[0])
         x = x + (image[0],)
